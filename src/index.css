@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  font-family: 'Kanit', sans-serif;
+}
+
+html[lang='ar'] body,
+html[lang='ar'] #root,
+html[lang='ar'] {
+  font-family: 'Tajawal', 'Kanit', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+:root {
+  --page-bg: #0c0c0c;
+  --dark-surface: #0c0c0c;
+  --light-surface: #ffffff;
+  --theme-text: #ffffff;
+  --theme-text-secondary: #d7e2ea;
+  --theme-border: rgba(215, 226, 234, 0.2);
+  --theme-hover: rgba(215, 226, 234, 0.1);
+  --logo-bg: rgba(19, 13, 13, 0.05);
+  --section-shadow: 0 -50px 80px -40px rgba(0, 0, 0, 0.55);
+}
+
+:root[data-theme='light'] {
+  --page-bg: #dfdcd4;
+  --dark-surface: #dfdcd4;
+  --light-surface: #dfdcd4;
+  --theme-text: #000000;
+  --theme-text-secondary: #4a4a4a;
+  --theme-border: rgba(0, 0, 0, 0.15);
+  --theme-hover: rgba(0, 0, 0, 0.06);
+  --logo-bg: rgba(0, 0, 0, 0.05);
+  --section-shadow: 0 -50px 80px -40px rgba(0, 0, 0, 0.25);
+}
+
+.section-shadow {
+  box-shadow: var(--section-shadow);
+}
+
+.theme-page-bg {
+  background-color: var(--page-bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-dark-surface {
+  background-color: var(--dark-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-light-surface {
+  background-color: var(--light-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-primary-text {
+  color: var(--theme-text);
+  transition: color 0.3s ease;
+}
+
+.theme-secondary-text {
+  color: var(--theme-text-secondary);
+  transition: color 0.3s ease;
+}
+
+.theme-services-surface {
+  background-color: #0c0c0c;
+  color: #ffffff;
+  --service-border: rgba(215, 226, 234, 0.15);
+  --service-text: #d7e2ea;
+  --service-heading: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:root[data-theme='light'] .theme-services-surface {
+  background-color: #dfdcd444;
+  color: #000000;
+  --service-border: rgba(0, 0, 0, 0.15);
+  --service-text: #4a4a4a;
+  --service-heading: #000000;
+}
+
+.hero-heading {
+  background: linear-gradient(180deg, #fffeff 0%, #474747 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: all 0.3s ease;
+}
+
+:root[data-theme='light'] .hero-heading {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: #000000;
+  color: #000000;
+}
+
+/* ===== Skeleton Loading ===== */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(215, 226, 234, 0.08) 25%,
+    rgba(215, 226, 234, 0.2) 50%,
+    rgba(215, 226, 234, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite linear;
+  border-radius: 8px;
+}
+
+:root[data-theme='light'] .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06) 25%,
+    rgba(0, 0, 0, 0.12) 50%,
+    rgba(0, 0, 0, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite linear;
+}
+
+/* Static skeleton shown before React mounts (in index.html) */
+#root:empty + .static-skeleton,
+.static-skeleton {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--theme-text);
+  padding: 1.25rem 1rem 2rem;
+}
+
+#root:not(:empty) ~ .static-skeleton,
+#root:not(:empty) + .static-skeleton {
+  display: none;
+}
+
+.static-skeleton__nav,
+.static-skeleton__hero,
+.static-skeleton__card,
+.static-skeleton__line,
+.static-skeleton__pill,
+.static-skeleton__button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(215, 226, 234, 0.08) 25%,
+    rgba(215, 226, 234, 0.2) 50%,
+    rgba(215, 226, 234, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: 12px;
+  animation: skeleton-shimmer 1.5s infinite linear;
+}
+
+:root[data-theme='light'] .static-skeleton__nav,
+:root[data-theme='light'] .static-skeleton__hero,
+:root[data-theme='light'] .static-skeleton__card,
+:root[data-theme='light'] .static-skeleton__line,
+:root[data-theme='light'] .static-skeleton__pill,
+:root[data-theme='light'] .static-skeleton__button {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06) 25%,
+    rgba(0, 0, 0, 0.12) 50%,
+    rgba(0, 0, 0, 0.06) 75%
+  );
+  background-size: 200% 100%;
+}
+
+.static-skeleton__nav {
+  width: min(1200px, 100%);
+  height: 64px;
+  margin: 0 auto 1.5rem;
+}
+
+.static-skeleton__hero {
+  width: min(1200px, 100%);
+  height: 420px;
+  margin: 0 auto;
+  border-radius: 28px;
+}
+
+.static-skeleton__content {
+  width: min(1200px, 100%);
+  margin: 1.5rem auto 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.static-skeleton__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.static-skeleton__card {
+  height: 220px;
+  border-radius: 22px;
+}
+
+.static-skeleton__line {
+  height: 18px;
+  width: 65%;
+  margin-bottom: 0.8rem;
+}
+
+.static-skeleton__line.short {
+  width: 40%;
+}
+
+.static-skeleton__pill {
+  display: inline-block;
+  width: 110px;
+  height: 38px;
+  margin-right: 0.75rem;
+}
+
+.static-skeleton__button {
+  display: inline-block;
+  width: 140px;
+  height: 46px;
+  margin-right: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .static-skeleton__row {
+    grid-template-columns: 1fr;
+  }
+
+  .static-skeleton__hero {
+    height: 320px;
+  }
+}
