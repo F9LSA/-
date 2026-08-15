@@ -4,7 +4,7 @@ import Magnet from './Magnet';
 import { useLanguage } from '../i18n';
 import featherImage from '../../External Photos/Feather.png';
 import aghsanBlackImage from '../../External Photos/أغصان black.png';
-import aghsanWhiteImage from '../../External Photos/أغصان White.png';
+import aghsanWhiteImage from '../../External Photos/أغصان white.png';
 
 // Website domain (code-only label — not displayed on the site)
 const WEBSITE_DOMAIN = 'https://aghsan.com';
