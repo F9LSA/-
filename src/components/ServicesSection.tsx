@@ -36,12 +36,12 @@ export default function ServicesSection() {
   return (
     <section
       id="price"
-      className="theme-services-surface section-shadow rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32"
+      className="theme-services-surface section-shadow rounded-t-[30px] sm:rounded-t-[50px] lg:rounded-t-[60px] px-4 sm:px-8 lg:px-10 py-16 sm:py-24 lg:py-32"
     >
       <FadeIn delay={0} y={40}>
         <h2
-          className="text-[var(--service-heading)] font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 transition-colors duration-300"
-          style={{ fontSize: 'clamp(2.5rem, 10vw, 130px)' }}
+          className="text-[var(--service-heading)] font-black uppercase text-center mb-12 sm:mb-20 lg:mb-28 transition-colors duration-300"
+          style={{ fontSize: 'clamp(2rem, 10vw, 130px)' }}
         >
           {t('services.heading')}
         </h2>
@@ -51,7 +51,7 @@ export default function ServicesSection() {
         {SERVICES.map((service, i) => (
           <FadeIn key={service.number} delay={i * 0.1} y={20}>
             <div
-              className="flex items-start gap-6 sm:gap-10 py-8 sm:py-10 md:py-12 transition-colors duration-300"
+              className="flex items-start gap-4 sm:gap-10 py-6 sm:py-10 lg:py-12 transition-colors duration-300"
               style={{
                 borderBottom:
                   i < SERVICES.length - 1 ? '1px solid var(--service-border)' : 'none',
@@ -59,20 +59,20 @@ export default function ServicesSection() {
             >
               <span
                 className="text-[var(--service-heading)] font-black flex-shrink-0 transition-colors duration-300"
-                style={{ fontSize: 'clamp(3rem, 10vw, 140px)', lineHeight: 1 }}
+                style={{ fontSize: 'clamp(2.5rem, 10vw, 140px)', lineHeight: 1 }}
               >
                 {service.number}
               </span>
               <div className="flex flex-col gap-3 justify-center">
                 <h3
                   className="text-[var(--service-heading)] font-medium uppercase transition-colors duration-300"
-                  style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
+                  style={{ fontSize: 'clamp(0.9rem, 2.2vw, 2.1rem)' }}
                 >
                   {service.name}
                 </h3>
                 <p
                   className="text-[var(--service-text)] font-light leading-relaxed max-w-2xl transition-colors duration-300"
-                  style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)', opacity: 0.7 }}
+                  style={{ fontSize: 'clamp(0.8rem, 1.6vw, 1.25rem)', opacity: 0.7 }}
                 >
                   {service.description}
                 </p>

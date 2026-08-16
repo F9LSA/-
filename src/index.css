@@ -155,7 +155,7 @@ body {
   min-height: 100vh;
   background: var(--page-bg);
   color: var(--theme-text);
-  padding: 1.25rem 1rem 2rem;
+  padding: 1rem 0.75rem 1.5rem;
 }
 
 #root:not(:empty) ~ .static-skeleton,
@@ -197,67 +197,209 @@ body {
   background-size: 200% 100%;
 }
 
+/* Mobile-first defaults (base styles) */
 .static-skeleton__nav {
   width: min(1200px, 100%);
-  height: 64px;
-  margin: 0 auto 1.5rem;
+  height: 56px;
+  margin: 0 auto 1rem;
 }
 
 .static-skeleton__hero {
   width: min(1200px, 100%);
-  height: 420px;
+  height: 280px;
   margin: 0 auto;
-  border-radius: 28px;
+  border-radius: 20px;
 }
 
 .static-skeleton__content {
   width: min(1200px, 100%);
-  margin: 1.5rem auto 0;
+  margin: 1.25rem auto 0;
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .static-skeleton__row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
 }
 
 .static-skeleton__card {
-  height: 220px;
-  border-radius: 22px;
+  height: 180px;
+  border-radius: 18px;
 }
 
 .static-skeleton__line {
-  height: 18px;
-  width: 65%;
-  margin-bottom: 0.8rem;
+  height: 16px;
+  width: 70%;
+  margin-bottom: 0.6rem;
 }
 
 .static-skeleton__line.short {
-  width: 40%;
+  width: 45%;
 }
 
 .static-skeleton__pill {
   display: inline-block;
-  width: 110px;
-  height: 38px;
-  margin-right: 0.75rem;
+  width: 90px;
+  height: 34px;
+  margin-right: 0.5rem;
 }
 
 .static-skeleton__button {
   display: inline-block;
-  width: 140px;
-  height: 46px;
-  margin-right: 0.75rem;
+  width: 120px;
+  height: 40px;
+  margin-right: 0.5rem;
 }
 
-@media (max-width: 768px) {
-  .static-skeleton__row {
-    grid-template-columns: 1fr;
+/* Tablet (640px and up) */
+@media (min-width: 640px) {
+  .static-skeleton {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .static-skeleton__nav {
+    height: 64px;
+    margin-bottom: 1.5rem;
   }
 
   .static-skeleton__hero {
-    height: 320px;
+    height: 340px;
+    border-radius: 24px;
+  }
+
+  .static-skeleton__content {
+    margin: 1.5rem auto 0;
+    gap: 1.25rem;
+  }
+
+  .static-skeleton__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .static-skeleton__card {
+    height: 200px;
+    border-radius: 20px;
+  }
+
+  .static-skeleton__line {
+    height: 18px;
+    width: 66%;
+    margin-bottom: 0.75rem;
+  }
+
+  .static-skeleton__line.short {
+    width: 41%;
+  }
+
+  .static-skeleton__pill {
+    width: 105px;
+    height: 37px;
+    margin-right: 0.7rem;
+  }
+
+  .static-skeleton__button {
+    width: 135px;
+    height: 44px;
+    margin-right: 0.7rem;
+  }
+}
+
+/* Desktop (1024px and up) — protected as-is */
+@media (min-width: 1024px) {
+  .static-skeleton {
+    padding: 1.5rem 1.5rem 2.5rem;
+  }
+
+  .static-skeleton__nav {
+    height: 72px;
+    margin-bottom: 2rem;
+  }
+
+  .static-skeleton__hero {
+    height: 420px;
+    border-radius: 28px;
+  }
+
+  .static-skeleton__content {
+    margin: 1.5rem auto 0;
+    gap: 1.25rem;
+  }
+
+  .static-skeleton__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .static-skeleton__card {
+    height: 220px;
+    border-radius: 22px;
+  }
+
+  .static-skeleton__line {
+    height: 19px;
+    width: 65%;
+    margin-bottom: 0.85rem;
+  }
+
+  .static-skeleton__line.short {
+    width: 40%;
+  }
+
+  .static-skeleton__pill {
+    width: 115px;
+    height: 40px;
+    margin-right: 0.8rem;
+  }
+
+  .static-skeleton__button {
+    width: 145px;
+    height: 48px;
+    margin-right: 0.8rem;
+  }
+}
+
+/* Large desktop (1280px and up) */
+@media (min-width: 1280px) {
+  .static-skeleton {
+    padding: 1.75rem 2rem 3rem;
+  }
+
+  .static-skeleton__nav {
+    height: 76px;
+    margin-bottom: 2.25rem;
+  }
+
+  .static-skeleton__hero {
+    height: 460px;
+    border-radius: 30px;
+  }
+
+  .static-skeleton__row {
+    gap: 1.25rem;
+  }
+
+  .static-skeleton__card {
+    height: 240px;
+    border-radius: 24px;
+  }
+
+  .static-skeleton__line {
+    height: 20px;
+    margin-bottom: 0.9rem;
+  }
+
+  .static-skeleton__pill {
+    width: 120px;
+    height: 42px;
+    margin-right: 0.85rem;
+  }
+
+  .static-skeleton__button {
+    width: 150px;
+    height: 50px;
+    margin-right: 0.85rem;
   }
 }

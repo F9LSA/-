@@ -69,13 +69,13 @@ function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
   return (
     <>
       {/* Thumbnail grid */}
-      <div className="grid grid-cols-3 gap-3 h-full">
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-2 sm:gap-3 h-full">
         {images.map((src, i) => (
           <button
             key={i}
             type="button"
             onClick={() => setLightboxIndex(i)}
-            className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border-2 border-[var(--theme-border)] bg-black/20 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-text)]"
+            className={`relative overflow-hidden rounded-[16px] sm:rounded-[32px] border-2 border-[var(--theme-border)] bg-black/20 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-text)] ${i > 0 ? 'hidden lg:block' : ''}`}
           >
             <img
               src={src}
@@ -104,13 +104,13 @@ function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
               type="button"
               aria-label="Close lightbox"
               onClick={() => setLightboxIndex(null)}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors duration-200 text-2xl"
+              className="absolute top-3 right-3 sm:top-6 sm:right-6 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors duration-200 text-xl sm:text-2xl"
             >
               ✕
             </button>
 
             {/* Image counter */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm font-medium">
+            <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-white text-xs sm:text-sm font-medium">
               {lightboxIndex + 1} / {images.length}
             </div>
 
@@ -120,7 +120,7 @@ function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
                 type="button"
                 aria-label="Previous photo"
                 onClick={(e) => { e.stopPropagation(); goTo(lightboxIndex - 1); }}
-                className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors duration-200 text-2xl"
+                className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors duration-200 text-xl sm:text-2xl"
               >
                 ‹
               </button>
@@ -135,7 +135,7 @@ function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
               transition={{ duration: 0.25 }}
               src={images[lightboxIndex]}
               alt={`${name} photo ${lightboxIndex + 1}`}
-              className="max-w-[90vw] max-h-[85vh] object-contain rounded-[12px]"
+              className="max-w-[92vw] sm:max-w-[90vw] max-h-[85vh] object-contain rounded-[12px]"
               onClick={(e) => e.stopPropagation()}
             />
 
@@ -145,7 +145,7 @@ function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
                 type="button"
                 aria-label="Next photo"
                 onClick={(e) => { e.stopPropagation(); goTo(lightboxIndex + 1); }}
-                className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors duration-200 text-2xl"
+                className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 z-10 theme-dark-surface/80 backdrop-blur-sm rounded-full w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors duration-200 text-xl sm:text-2xl"
               >
                 ›
               </button>
@@ -182,27 +182,27 @@ function ProjectCard({
   return (
     <div
       ref={cardRef}
-      className="sticky top-24 md:top-32 h-[85vh]"
-      style={{ top: `calc(6rem + ${index * 28}px)` }}
+      className="sticky top-20 sm:top-24 lg:top-32 h-[85vh]"
+      style={{ top: `calc(5rem + ${index * 28}px)` }}
     >
       <motion.div
         style={{ scale }}
-        className="theme-dark-surface rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[var(--theme-border)] p-4 sm:p-6 md:p-8 h-full flex flex-col origin-top"
+        className="theme-dark-surface rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] border-2 border-[var(--theme-border)] p-3 sm:p-6 lg:p-8 h-full flex flex-col origin-top"
       >
         {/* Top row */}
-        <div className="flex flex-wrap items-center gap-4 sm:gap-6 justify-between pb-6 sm:pb-8">
-          <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-6 justify-between pb-4 sm:pb-8">
+          <div className="flex items-center gap-3 sm:gap-6">
             <span
               className="theme-primary-text font-black"
-              style={{ fontSize: 'clamp(2.5rem, 7vw, 100px)', lineHeight: 1 }}
+              style={{ fontSize: 'clamp(2rem, 7vw, 100px)', lineHeight: 1 }}
             >
               {project.number}
             </span>
             <div className="flex flex-col">
-              <span className="theme-secondary-text uppercase tracking-widest text-xs sm:text-sm font-medium">
+              <span className="theme-secondary-text uppercase tracking-widest text-[10px] sm:text-sm font-medium">
                 {t(project.categoryKey)}
               </span>
-              <span className="theme-primary-text uppercase font-medium text-lg sm:text-2xl md:text-3xl">
+              <span className="theme-primary-text uppercase font-medium text-base sm:text-2xl lg:text-3xl">
                 {t(project.name)}
               </span>
             </div>
@@ -211,33 +211,32 @@ function ProjectCard({
         </div>
 
         {/* Bottom row: image grid */}
-        <div className="flex-1 flex gap-3 min-h-0">
+        <div className="flex-1 flex gap-2 sm:gap-3 min-h-0">
           {project.col1Image2 ? (
             <>
-              <div className="flex flex-col gap-3" style={{ width: '40%' }}>
+              <div className="flex-col gap-2 sm:gap-3 hidden lg:flex" style={{ width: '40%' }}>
                 <img
                   src={project.col1Image1}
                   alt={`${t(project.name)} detail 1`}
-                  className={`w-full object-cover ${project.col1Image1Position || 'object-top'} rounded-[40px] sm:rounded-[50px] md:rounded-[60px]`}
-                  style={{ height: 'clamp(130px, 16vw, 230px)' }}
+                  className={`w-full object-cover ${project.col1Image1Position || 'object-top'} rounded-[24px] sm:rounded-[50px] lg:rounded-[60px]`}
+                  style={{ height: 'clamp(110px, 16vw, 230px)' }}
                   loading="lazy"
                 />
                 <img
                   src={project.col1Image2}
                   alt={`${t(project.name)} detail 2`}
-                  className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
+                  className="w-full object-cover rounded-[24px] sm:rounded-[50px] lg:rounded-[60px]"
                   style={{ height: 'clamp(10px, 16vw, 250px)' }}
                   loading="lazy"
                 />
               </div>
               <div
-                className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-                style={{ width: '60%' }}
+                className="overflow-hidden rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] w-full lg:w-[60%]"
               >
                 <img
                   src={project.col2Image}
                   alt={`${t(project.name)} main visual`}
-                  className={`w-full h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-cover ${project.col2ImagePosition || 'object-center'}`}
+                  className={`w-full h-full rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] object-cover ${project.col2ImagePosition || 'object-center'}`}
                   loading="lazy"
                 />
               </div>
@@ -245,24 +244,22 @@ function ProjectCard({
           ) : (
             <>
               <div
-                className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-                style={{ width: '50%' }}
+                className="overflow-hidden rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] hidden lg:block w-full lg:w-1/2"
               >
                 <img
                   src={project.col1Image1}
                   alt={`${t(project.name)} detail 1`}
-                  className={`w-full h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-cover ${project.col1Image1Position || 'object-top'}`}
+                  className={`w-full h-full rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] object-cover ${project.col1Image1Position || 'object-top'}`}
                   loading="lazy"
                 />
               </div>
               <div
-                className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-                style={{ width: '50%' }}
+                className="overflow-hidden rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] w-full lg:w-1/2"
               >
                 <img
                   src={project.col2Image}
                   alt={`${t(project.name)} main visual`}
-                  className={`w-full h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-cover ${project.col2ImagePosition || 'object-center'}`}
+                  className={`w-full h-full rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] object-cover ${project.col2ImagePosition || 'object-center'}`}
                   loading="lazy"
                 />
               </div>
@@ -296,20 +293,20 @@ function ProjectOverlay({
       className="fixed inset-0 z-[100] theme-dark-surface overflow-y-auto"
     >
       {/* Sticky header with close button */}
-      <div className="sticky top-0 z-10 theme-dark-surface/95 backdrop-blur-md border-b border-[var(--theme-border)] px-5 sm:px-8 md:px-12 py-4 sm:py-5">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+      <div className="sticky top-0 z-10 theme-dark-surface/95 backdrop-blur-md border-b border-[var(--theme-border)] px-4 sm:px-8 lg:px-12 py-3 sm:py-5">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 sm:gap-6 min-w-0">
             <span
               className="theme-primary-text font-black shrink-0"
-              style={{ fontSize: 'clamp(2rem, 5vw, 60px)', lineHeight: 1 }}
+              style={{ fontSize: 'clamp(1.75rem, 5vw, 60px)', lineHeight: 1 }}
             >
               {project.number}
             </span>
             <div className="flex flex-col min-w-0">
-              <span className="theme-secondary-text uppercase tracking-widest text-xs sm:text-sm font-medium truncate">
+              <span className="theme-secondary-text uppercase tracking-widest text-[10px] sm:text-sm font-medium truncate">
                 {t(project.categoryKey)}
               </span>
-              <span className="theme-primary-text uppercase font-medium text-base sm:text-xl md:text-2xl truncate">
+              <span className="theme-primary-text uppercase font-medium text-sm sm:text-xl lg:text-2xl truncate">
                 {t(project.name)}
               </span>
             </div>
@@ -319,13 +316,13 @@ function ProjectOverlay({
       </div>
 
       {/* Scrollable content */}
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 py-8 sm:py-10 md:py-12 flex flex-col gap-8 sm:gap-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 py-6 sm:py-10 lg:py-12 flex flex-col gap-6 sm:gap-10">
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.4 }}
-          className="theme-secondary-text text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl"
+          className="theme-secondary-text text-sm sm:text-lg lg:text-xl leading-relaxed max-w-3xl"
         >
           {t(`projects.desc.${index + 1}`)}
         </motion.p>
@@ -335,7 +332,7 @@ function ProjectOverlay({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.4 }}
-          className="h-[55vh] sm:h-[65vh] md:h-[70vh]"
+          className="h-[50vh] sm:h-[65vh] lg:h-[70vh]"
         >
           <PhotoLightbox images={albumImages} name={t(project.name)} />
         </motion.div>
@@ -460,12 +457,12 @@ export default function ProjectsSection({
   return (
     <section
       id="projects"
-      className="theme-dark-surface section-shadow relative rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-28 pb-20"
+      className="theme-dark-surface section-shadow relative rounded-t-[30px] sm:rounded-t-[50px] lg:rounded-t-[60px] px-4 sm:px-8 lg:px-10 pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-20"
     >
       <FadeIn delay={0} y={40}>
         <h2
-          className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-16 sm:mb-20 md:mb-24"
-          style={{ fontSize: 'clamp(2.5rem, 10vw, 130px)' }}
+          className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-12 sm:mb-20 lg:mb-24"
+          style={{ fontSize: 'clamp(2rem, 10vw, 130px)' }}
         >
           {t('projects.heading')}
         </h2>
@@ -485,11 +482,11 @@ export default function ProjectsSection({
       </div>
 
       {onViewAll && (
-        <div className="max-w-6xl mx-auto flex justify-center pt-16 sm:pt-20">
+        <div className="max-w-6xl mx-auto flex justify-center pt-12 sm:pt-20">
           <button
             type="button"
             onClick={onViewAll}
-            className="theme-primary-text uppercase font-medium tracking-widest text-sm sm:text-base border-2 border-[var(--theme-border)] rounded-full px-8 py-4 transition-colors duration-200 hover:bg-[var(--theme-hover)]"
+            className="theme-primary-text uppercase font-medium tracking-widest text-sm sm:text-base border-2 border-[var(--theme-border)] rounded-full px-6 sm:px-8 py-3 sm:py-4 transition-colors duration-200 hover:bg-[var(--theme-hover)]"
           >
             {t('projects.viewAll')}
           </button>

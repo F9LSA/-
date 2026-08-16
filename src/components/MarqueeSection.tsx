@@ -79,7 +79,7 @@ function Tile({ src, alt }: { src: string; alt: string }) {
       src={src}
       alt={alt}
       loading="lazy"
-      className="w-[420px] h-[270px] rounded-2xl object-cover flex-shrink-0"
+      className="w-[220px] h-[140px] sm:w-[340px] sm:h-[220px] lg:w-[420px] lg:h-[270px] rounded-xl sm:rounded-2xl object-cover flex-shrink-0"
     />
   );
 }
@@ -105,9 +105,9 @@ export default function MarqueeSection() {
   return (
     <section
       ref={sectionRef}
-      className="theme-dark-surface pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden"
+      className="theme-dark-surface pt-16 sm:pt-32 lg:pt-40 pb-8 sm:pb-10 overflow-hidden"
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2 sm:gap-3">
         <div
           className="flex gap-3"
           style={{

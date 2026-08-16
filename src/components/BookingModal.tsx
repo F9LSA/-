@@ -145,7 +145,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -162,16 +162,16 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-md rounded-3xl border border-[var(--theme-border)] bg-[var(--dark-surface)] p-6 shadow-2xl sm:p-8"
+            className="relative w-full max-w-md rounded-3xl border border-[var(--theme-border)] bg-[var(--dark-surface)] p-4 sm:p-8 shadow-2xl"
           >
             {/* Close button */}
             <button
               type="button"
               onClick={onClose}
               aria-label={t('booking.close')}
-              className="absolute right-4 top-4 rounded-full p-2 text-[var(--theme-text-secondary)] transition hover:bg-[var(--theme-hover)]"
+              className="absolute right-3 sm:right-4 top-3 sm:top-4 rounded-full p-1.5 sm:p-2 text-[var(--theme-text-secondary)] transition hover:bg-[var(--theme-hover)]"
             >
-              <X size={20} />
+              <X size={16} />
             </button>
 
             {/* Progress indicator */}
@@ -184,7 +184,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <React.Fragment key={s}>
                       {i > 0 && (
                         <div
-                          className={`mx-2 h-px flex-1 ${
+                          className={`mx-1.5 sm:mx-2 h-px flex-1 ${
                             stageIndex >= i ? 'bg-[#3a000e]' : 'bg-[var(--theme-border)]'
                           }`}
                         />
@@ -227,7 +227,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                 >
-                  <h3 className="mb-1 text-xl font-bold text-[var(--theme-text)]">
+                  <h3 className="mb-1 text-lg sm:text-xl font-bold text-[var(--theme-text)]">
                     {t('booking.phone.title')}
                   </h3>
                   <p className="mb-6 text-sm text-[var(--theme-text-secondary)]">
@@ -244,7 +244,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         : 'border-[var(--theme-border)] focus-within:border-[var(--theme-text)]'
                     }`}
                   >
-                    <span className="flex items-center gap-1 border-r border-[var(--theme-border)] bg-[var(--theme-hover)] px-3 py-3 text-sm font-medium text-[var(--theme-text)]">
+                    <span className="flex items-center gap-1 border-r border-[var(--theme-border)] bg-[var(--theme-hover)] px-2.5 sm:px-3 py-2.5 sm:py-3 text-sm font-medium text-[var(--theme-text)]">
                       🇸🇦 +966
                     </span>
                     <input
@@ -286,7 +286,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         disabled={sending}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="w-full rounded-full py-3.5 text-sm font-semibold uppercase tracking-widest text-white transition hover:opacity-90 disabled:opacity-60"
+                        className="w-full rounded-full py-3 sm:py-3.5 text-sm font-semibold uppercase tracking-widest text-white transition hover:opacity-90 disabled:opacity-60"
                         style={{
                           background:
                             'linear-gradient(123deg, #3a000e 7%, #3a000e 37%, #3a000e 72%, #030303 100%)',
@@ -312,7 +312,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                 >
-                  <h3 className="mb-1 text-xl font-bold text-[var(--theme-text)]">
+                  <h3 className="mb-1 text-lg sm:text-xl font-bold text-[var(--theme-text)]">
                     {t('booking.otp.title')}
                   </h3>
                   <p className="mb-6 text-sm text-[var(--theme-text-secondary)]">
@@ -334,7 +334,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       setOtpError(false);
                     }}
                     placeholder="••••"
-                    className={`w-full rounded-xl border bg-transparent px-3 py-3 text-center text-2xl tracking-[0.5em] text-[var(--theme-text)] outline-none transition placeholder:text-[var(--theme-text-secondary)] ${
+                    className={`w-full rounded-xl border bg-transparent px-3 py-3 text-center text-xl sm:text-2xl tracking-[0.5em] text-[var(--theme-text)] outline-none transition placeholder:text-[var(--theme-text-secondary)] ${
                       otpError ? 'border-red-500' : 'border-[var(--theme-border)]'
                     }`}
                   />
@@ -345,11 +345,11 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <span className="font-bold text-[var(--theme-text)]">{expectedOtp}</span>
                   </p>
 
-                  <div className="mt-6 flex items-center gap-3">
+                  <div className="mt-6 flex items-center gap-2 sm:gap-3">
                     <button
                       type="button"
                       onClick={() => setStage('phone')}
-                      className="flex items-center gap-1.5 rounded-full border border-[var(--theme-border)] px-4 py-3 text-sm font-medium text-[var(--theme-text-secondary)] transition hover:bg-[var(--theme-hover)]"
+                      className="flex items-center gap-1.5 rounded-full border border-[var(--theme-border)] px-3 sm:px-4 py-2.5 sm:py-3 text-sm font-medium text-[var(--theme-text-secondary)] transition hover:bg-[var(--theme-hover)]"
                     >
                       <ArrowLeft size={16} /> {t('booking.otp.change')}
                     </button>
@@ -383,7 +383,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                 >
-                  <h3 className="mb-1 text-xl font-bold text-[var(--theme-text)]">
+                  <h3 className="mb-1 text-lg sm:text-xl font-bold text-[var(--theme-text)]">
                     {t('booking.schedule.title')}
                   </h3>
                   <p className="mb-6 text-sm text-[var(--theme-text-secondary)]">
@@ -393,13 +393,13 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[var(--theme-text-secondary)]">
                     {t('booking.schedule.day')}
                   </label>
-                  <div className="mb-5 grid grid-cols-4 gap-2">
+                  <div className="mb-5 grid grid-cols-4 gap-1.5 sm:gap-2">
                     {days.map((d) => (
                       <button
                         key={d.date}
                         type="button"
                         onClick={() => setSelectedDate(d.date)}
-                        className={`rounded-xl border px-2 py-2.5 text-center transition ${
+                        className={`rounded-xl border px-1.5 sm:px-2 py-2 sm:py-2.5 text-center transition ${
                           selectedDate === d.date
                             ? 'border-[#3a000e] bg-[#3a000e] text-white'
                             : 'border-[var(--theme-border)] text-[var(--theme-text)] hover:bg-[var(--theme-hover)]'
@@ -418,13 +418,13 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[var(--theme-text-secondary)]">
                     {t('booking.schedule.time')}
                   </label>
-                  <div className="mb-6 grid grid-cols-3 gap-2">
+                  <div className="mb-6 grid grid-cols-3 gap-1.5 sm:gap-2">
                     {timeSlots.map((tSlot) => (
                       <button
                         key={tSlot}
                         type="button"
                         onClick={() => setSelectedTime(tSlot)}
-                        className={`rounded-xl border px-2 py-2.5 text-sm font-medium transition ${
+                        className={`rounded-xl border px-1.5 sm:px-2 py-2 sm:py-2.5 text-sm font-medium transition ${
                           selectedTime === tSlot
                             ? 'border-[#3a000e] bg-[#3a000e] text-white'
                             : 'border-[var(--theme-border)] text-[var(--theme-text)] hover:bg-[var(--theme-hover)]'
@@ -435,11 +435,11 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <button
                       type="button"
                       onClick={() => setStage('otp')}
-                      className="flex items-center gap-1.5 rounded-full border border-[var(--theme-border)] px-4 py-3 text-sm font-medium text-[var(--theme-text-secondary)] transition hover:bg-[var(--theme-hover)]"
+                      className="flex items-center gap-1.5 rounded-full border border-[var(--theme-border)] px-3 sm:px-4 py-2.5 sm:py-3 text-sm font-medium text-[var(--theme-text-secondary)] transition hover:bg-[var(--theme-hover)]"
                     >
                       <ArrowLeft size={16} /> {t('booking.schedule.back')}
                     </button>
@@ -477,11 +477,11 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.1 }}
-                    className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#3a000e] text-white"
+                    className="mx-auto mb-4 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-[#3a000e] text-white"
                   >
-                    <Check size={32} />
+                    <Check size={28} />
                   </motion.div>
-                  <h3 className="mb-2 text-xl font-bold text-[var(--theme-text)]">
+                  <h3 className="mb-2 text-lg sm:text-xl font-bold text-[var(--theme-text)]">
                     {t('booking.confirmed.title')}
                   </h3>
                   <p className="mb-4 text-sm text-[var(--theme-text-secondary)]">

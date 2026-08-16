@@ -75,7 +75,7 @@ export default function HeroSection({
     >
       {/* Navbar */}
       <FadeIn delay={0} y={-20} as="nav">
-        <nav className="relative flex justify-between items-center gap-4 px-6 md:px-10 pt-6 md:pt-8 shadow-lg">
+        <nav className="relative flex justify-between items-center gap-3 sm:gap-4 px-4 sm:px-6 lg:px-10 pt-4 sm:pt-6 lg:pt-8 shadow-lg">
           {/* Left: logo */}
           <button
             type="button"
@@ -85,19 +85,19 @@ export default function HeroSection({
             <img
               src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
               alt="أغصان"
-              className="h-10 md:h-14 lg:h-16 w-auto select-none pointer-events-none"
+              className="h-8 sm:h-10 lg:h-14 xl:h-16 w-auto select-none pointer-events-none"
               draggable={false}
             />
           </button>
 
           {/* Center: nav links (desktop only) */}
-          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-4 md:gap-8">
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-4 lg:gap-8">
             {NAV_LINKS.filter((link) => link.tab !== 'home').map((link) => (
               <button
                 key={link.tab}
                 type="button"
                 onClick={() => onTabChange(link.tab)}
-                className={`${isLightMode ? 'text-black' : 'theme-primary-text'} font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem] transition-opacity duration-200 hover:opacity-70 ${
+                className={`${isLightMode ? 'text-black' : 'theme-primary-text'} font-medium uppercase tracking-wider text-sm lg:text-lg xl:text-[1.4rem] transition-opacity duration-200 hover:opacity-70 ${
                   activeTab === link.tab ? 'opacity-100 underline underline-offset-8' : 'opacity-60'
                 }`}
               >
@@ -107,13 +107,13 @@ export default function HeroSection({
           </div>
 
           {/* Right: hamburger (mobile) + language toggle + theme toggle */}
-          <div className="flex items-center gap-2 md:gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 shrink-0">
             {/* Hamburger menu — mobile only */}
             <button
               type="button"
               onClick={() => setIsDrawerOpen(true)}
               aria-label={t('nav.menu')}
-              className={`${textColorClass} md:hidden rounded-full p-2.5 shadow-2xl transition-colors hover:bg-[var(--theme-hover)]`}
+              className={`${textColorClass} lg:hidden rounded-full p-2.5 shadow-2xl transition-colors hover:bg-[var(--theme-hover)]`}
             >
               <Menu className="h-5 w-5" strokeWidth={2.5} />
             </button>
@@ -122,7 +122,7 @@ export default function HeroSection({
               type="button"
               onClick={toggleLanguage}
               aria-label="Switch language"
-              className={`${textColorClass} rounded-full px-3 py-2 text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] md:px-4 md:text-sm`}
+              className={`${textColorClass} rounded-full px-2.5 sm:px-3 py-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] lg:px-4 lg:text-sm`}
             >
               {isArabic ? 'عربي/إنجليزي' : 'EN/AR'}
             </button>
@@ -130,7 +130,7 @@ export default function HeroSection({
               type="button"
               onClick={onToggleTheme}
               aria-label={`Switch to ${isLightMode ? 'dark' : 'light'} mode`}
-              className={`${textColorClass} rounded-full px-3 py-2 text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] md:px-4 md:text-sm`}
+              className={`${textColorClass} rounded-full px-2.5 sm:px-3 py-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] lg:px-4 lg:text-sm`}
             >
               {isLightMode ? '🌙 Dark' : '☀️ Light'}
             </button>
@@ -145,7 +145,7 @@ export default function HeroSection({
             {/* Backdrop */}
             <motion.div
               key="drawer-backdrop"
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -156,7 +156,7 @@ export default function HeroSection({
             {/* Drawer panel */}
             <motion.div
               key="drawer-panel"
-              className="fixed top-0 bottom-0 z-50 w-[85%] max-w-sm theme-dark-surface theme-primary-text shadow-2xl md:hidden"
+              className="fixed top-0 bottom-0 z-50 w-[85%] max-w-sm theme-dark-surface theme-primary-text shadow-2xl lg:hidden"
               style={{
                 [isArabic ? 'right' : 'left']: 0,
               }}
@@ -214,41 +214,50 @@ export default function HeroSection({
       {/* Hero content — only shown on the home tab */}
       {isHome && (
         <>
-          {/* Hero Heading */}
-          <div className="overflow-hidden mt-10 sm:mt-8 md:mt-6 px-2">
-            <FadeIn delay={0.15} y={40}>
-              <h1
-                className={`hero-heading font-black uppercase tracking-tight leading-none whitespace-normal w-full text-center ${
-                  isArabic
-                    ? 'text-[8.5vw] sm:text-[9.5vw] md:text-[10.5vw] lg:text-[11.5vw]'
-                    : 'text-[8vw] sm:text-[9vw] md:text-[10vw] lg:text-[11vw]'
-                }`}
-              >
-                {t('hero.welcome')}
-              </h1>
-            </FadeIn>
-          </div>
+          {/* Centered hero content (mobile) */}
+          <div className="flex flex-col items-center justify-center flex-1 lg:block lg:flex-none">
+            {/* Hero Heading */}
+            <div className="overflow-hidden lg:mt-6 lg:mb-0 px-2">
+              <FadeIn delay={0.15} y={40}>
+                <h1
+                  className={`hero-heading font-black uppercase tracking-tight leading-none whitespace-normal w-full text-center ${
+                    isArabic
+                      ? 'text-[11vw] sm:text-[9.5vw] lg:text-[10.5vw] xl:text-[11.5vw]'
+                      : 'text-[10.5vw] sm:text-[9vw] lg:text-[10vw] xl:text-[11vw]'
+                  }`}
+                >
+                  {/* Desktop: single string (unchanged) */}
+                  <span className="max-[639px]:hidden">{t('hero.welcome')}</span>
+                  {/* Mobile: stacked two lines */}
+                  <span className="hidden max-[639px]:block">
+                    <span className="block">{t('hero.welcome.line1')}</span>
+                    <span className="block">{t('hero.welcome.line2')}</span>
+                  </span>
+                </h1>
+              </FadeIn>
+            </div>
 
-          {/* Portrait */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[110px] sm:w-[135px] md:w-[165px] lg:w-[200px]">
-            <FadeIn delay={0.6} y={30}>
-              <Magnet padding={150} strength={3}>
-                <img
-                  src={featherImage}
-                  alt="Feather"
-                  className="w-full h-auto select-none pointer-events-none -rotate-[35deg]"
-                  draggable={false}
-                />
-              </Magnet>
-            </FadeIn>
+            {/* Portrait */}
+            <div className="relative mx-auto mt-2 sm:mt-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[90px] sm:w-[135px] lg:w-[165px] xl:w-[200px]">
+              <FadeIn delay={0.6} y={30}>
+                <Magnet padding={150} strength={3}>
+                  <img
+                    src={featherImage}
+                    alt="Feather"
+                    className="w-full h-auto select-none pointer-events-none -rotate-[35deg]"
+                    draggable={false}
+                  />
+                </Magnet>
+              </FadeIn>
+            </div>
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-auto flex justify-between items-end px-6 md:px-10 pb-7 sm:pb-8 md:pb-10 relative z-20">
+          <div className="mt-auto flex justify-between items-end px-4 sm:px-6 lg:px-10 pb-5 sm:pb-7 lg:pb-10 relative z-20">
             <FadeIn delay={0.35} y={20}>
               <p
-                className="theme-secondary-text font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[260px]"
-                style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
+                className="theme-secondary-text font-light uppercase tracking-wide leading-snug max-w-[140px] sm:max-w-[220px] lg:max-w-[260px]"
+                style={{ fontSize: 'clamp(0.65rem, 1.4vw, 1.5rem)' }}
               >
                 {t('hero.tagline')}
               </p>

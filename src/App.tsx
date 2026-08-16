@@ -57,8 +57,8 @@ function AppContent() {
 
       {activeTab === 'projects' && <ProjectsSection />}
 
-      <footer className="theme-dark-surface theme-primary-text border-t border-[var(--theme-border)] px-6 py-16 md:px-10">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
+      <footer className="theme-dark-surface theme-primary-text border-t border-[var(--theme-border)] px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+        <div className="mx-auto grid max-w-6xl gap-6 sm:gap-10 lg:grid-cols-3">
           <div>
             <h3 className="mb-4 text-lg font-semibold uppercase tracking-[0.2em]">{t('footer.whatsapp')}</h3>
             <a
@@ -102,15 +102,15 @@ function AppContent() {
           </div>
         </div>
       </footer>
-      <div className="theme-dark-surface theme-primary-text border-t border-[var(--theme-border)] px-6 pb-10 pt-6 md:px-10">
+      <div className="theme-dark-surface theme-primary-text border-t border-[var(--theme-border)] px-4 sm:px-6 pb-8 sm:pb-10 pt-4 sm:pt-6 lg:px-10">
         <div className="mx-auto max-w-6xl">
           {/* Payment Methods */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <svg
               viewBox="0 0 384 512"
               fill="currentColor"
               aria-label="Apple Pay"
-              className="h-12 w-20 rounded-xl border border-[var(--theme-border)] bg-[var(--logo-bg)] p-1"
+              className="h-10 w-16 sm:h-12 sm:w-20 rounded-xl border border-[var(--theme-border)] bg-[var(--logo-bg)] p-1"
             >
               <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
             </svg>
@@ -126,7 +126,7 @@ function AppContent() {
                 key={logo.alt}
                 src={logo.src}
                 alt={logo.alt}
-                className="h-12 w-20 rounded-xl border border-[var(--theme-border)] bg-[var(--logo-bg)] p-1 object-cover"
+                className="h-10 w-16 sm:h-12 sm:w-20 rounded-xl border border-[var(--theme-border)] bg-[var(--logo-bg)] p-1 object-cover"
                 loading="lazy"
               />
             ))}

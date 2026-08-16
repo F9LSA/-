@@ -18,6 +18,8 @@ const translations: Translations = {
 
   // Hero
   'hero.welcome': { en: 'WELCOME TO AGHSAN', ar: 'مرحباً بكم في أغصان' },
+  'hero.welcome.line1': { en: 'WELCOME TO', ar: 'مرحباً بكم في' },
+  'hero.welcome.line2': { en: 'AGHSAN', ar: 'أغصان' },
   'hero.tagline': {
     en: 'Your partner in creating exceptional experiences..',
     ar: 'شريكك في صناعة تجارب استثنائية..',
