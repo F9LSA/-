@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import FadeIn from './FadeIn';
 import Magnet from './Magnet';
 import { useLanguage } from '../i18n';
@@ -26,6 +28,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const isHome = activeTab === 'home';
   const { t, toggleLanguage, isArabic } = useLanguage();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const NAV_LINKS: { label: string; tab: TabId }[] = [
     { label: t('nav.aghsan'), tab: 'home' },
@@ -33,6 +36,37 @@ export default function HeroSection({
     { label: t('nav.services'), tab: 'services' },
     { label: t('nav.projects'), tab: 'projects' },
   ];
+
+  const DRAWER_LINKS = NAV_LINKS.filter((link) => link.tab !== 'home');
+
+  // Close drawer on Escape key + lock body scroll while open
+  useEffect(() => {
+    if (!isDrawerOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsDrawerOpen(false);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isDrawerOpen]);
+
+  // Close drawer whenever active tab changes
+  useEffect(() => {
+    setIsDrawerOpen(false);
+  }, [activeTab]);
+
+  const textColorClass = isLightMode ? 'text-black' : 'theme-primary-text';
+
+  const handleNavClick = (tab: TabId) => {
+    onTabChange(tab);
+    setIsDrawerOpen(false);
+  };
 
   return (
     <section
@@ -45,7 +79,7 @@ export default function HeroSection({
           {/* Left: logo */}
           <button
             type="button"
-            onClick={() => onTabChange('home')}
+            onClick={() => handleNavClick('home')}
             className="opacity-100 transition-opacity duration-200 hover:opacity-70"
           >
             <img
@@ -56,8 +90,8 @@ export default function HeroSection({
             />
           </button>
 
-          {/* Center: nav links */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4 md:gap-8">
+          {/* Center: nav links (desktop only) */}
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-4 md:gap-8">
             {NAV_LINKS.filter((link) => link.tab !== 'home').map((link) => (
               <button
                 key={link.tab}
@@ -72,13 +106,23 @@ export default function HeroSection({
             ))}
           </div>
 
-          {/* Right: language toggle + theme toggle */}
+          {/* Right: hamburger (mobile) + language toggle + theme toggle */}
           <div className="flex items-center gap-2 md:gap-3 shrink-0">
+            {/* Hamburger menu — mobile only */}
+            <button
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              aria-label={t('nav.menu')}
+              className={`${textColorClass} md:hidden rounded-full p-2.5 shadow-2xl transition-colors hover:bg-[var(--theme-hover)]`}
+            >
+              <Menu className="h-5 w-5" strokeWidth={2.5} />
+            </button>
+
             <button
               type="button"
               onClick={toggleLanguage}
               aria-label="Switch language"
-              className={`${isLightMode ? 'text-black' : 'theme-primary-text'} rounded-full px-3 py-2 text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] md:px-4 md:text-sm`}
+              className={`${textColorClass} rounded-full px-3 py-2 text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] md:px-4 md:text-sm`}
             >
               {isArabic ? 'عربي/إنجليزي' : 'EN/AR'}
             </button>
@@ -86,13 +130,86 @@ export default function HeroSection({
               type="button"
               onClick={onToggleTheme}
               aria-label={`Switch to ${isLightMode ? 'dark' : 'light'} mode`}
-              className={`${isLightMode ? 'text-black' : 'theme-primary-text'} rounded-full px-3 py-2 text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] md:px-4 md:text-sm`}
+              className={`${textColorClass} rounded-full px-3 py-2 text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] md:px-4 md:text-sm`}
             >
               {isLightMode ? '🌙 Dark' : '☀️ Light'}
             </button>
           </div>
         </nav>
       </FadeIn>
+
+      {/* Mobile Nav Drawer */}
+      <AnimatePresence>
+        {isDrawerOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="drawer-backdrop"
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setIsDrawerOpen(false)}
+            />
+
+            {/* Drawer panel */}
+            <motion.div
+              key="drawer-panel"
+              className="fixed top-0 bottom-0 z-50 w-[85%] max-w-sm theme-dark-surface theme-primary-text shadow-2xl md:hidden"
+              style={{
+                [isArabic ? 'right' : 'left']: 0,
+              }}
+              initial={{ x: isArabic ? '100%' : '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: isArabic ? '100%' : '-100%' }}
+              transition={{ type: 'tween', duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={t('nav.menu')}
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-[var(--theme-border)]">
+                <span className="text-sm font-medium uppercase tracking-[0.2em] theme-secondary-text">
+                  {t('nav.menu')}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsDrawerOpen(false)}
+                  aria-label={t('nav.close')}
+                  className={`${textColorClass} rounded-full p-2 transition-colors hover:bg-[var(--theme-hover)]`}
+                >
+                  <X className="h-5 w-5" strokeWidth={2.5} />
+                </button>
+              </div>
+
+              {/* Drawer nav links — all except أغصان */}
+              <nav className="flex flex-col px-4 py-6 gap-2">
+                {DRAWER_LINKS.map((link, index) => (
+                  <motion.button
+                    key={link.tab}
+                    type="button"
+                    onClick={() => handleNavClick(link.tab)}
+                    initial={{ opacity: 0, x: isArabic ? 20 : -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + index * 0.06, duration: 0.3 }}
+                    className={`flex items-center justify-between rounded-xl px-4 py-4 text-lg font-medium uppercase tracking-wider text-start transition-colors hover:bg-[var(--theme-hover)] ${
+                      activeTab === link.tab
+                        ? 'opacity-100 underline underline-offset-8'
+                        : 'opacity-60'
+                    }`}
+                  >
+                    {link.label}
+                    <span className="theme-secondary-text text-xs opacity-60">
+                      {isArabic ? '←' : '→'}
+                    </span>
+                  </motion.button>
+                ))}
+              </nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Hero content — only shown on the home tab */}
       {isHome && (

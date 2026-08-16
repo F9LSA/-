@@ -13,6 +13,8 @@ const translations: Translations = {
   'nav.services': { en: 'Services', ar: 'خدماتنا' },
   'nav.projects': { en: 'Projects', ar: 'مشاريعنا' },
   'nav.language': { en: 'EN/AR', ar: 'ع/إ' },
+  'nav.menu': { en: 'Menu', ar: 'القائمة' },
+  'nav.close': { en: 'Close', ar: 'إغلاق' },
 
   // Hero
   'hero.welcome': { en: 'WELCOME TO AGHSAN', ar: 'مرحباً بكم في أغصان' },
