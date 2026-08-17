@@ -18,7 +18,7 @@ const translations: Translations = {
 
   // Hero
   'hero.welcome': { en: 'WELCOME TO AGHSAN', ar: 'مرحباً بكم في أغصان' },
-  'hero.welcome.line1': { en: 'WELCOME TO', ar: 'مرحباً بكم في' },
+  'hero.welcome.line1': { en: 'WELCOME TO', ar: 'مرحبا بكم في' },
   'hero.welcome.line2': { en: 'AGHSAN', ar: 'أغصان' },
   'hero.tagline': {
     en: 'Your partner in creating exceptional experiences..',
@@ -196,6 +196,23 @@ DIVINIA is your trusted, all-in-one aesthetic clinic.`,
   'footer.hours': { en: '06:00 AM - 9:00 PM', ar: '06:00 صباحاً - 9:00 مساءً' },
   'footer.noFriday': { en: 'No Appointments on Friday', ar: 'لا مواعيد يوم الجمعة' },
   'footer.contact': { en: 'Contact', ar: 'اتصل بنا' },
+
+  // Admin
+  'admin.login.title': { en: 'Admin Login', ar: 'تسجيل دخول المسؤوول' },
+  'admin.dashboard.title': { en: 'Admin Panel', ar: 'لوحة التحكم' },
+  'admin.dashboard.welcome': { en: 'Welcome, Admin', ar: 'مرحباً، أيها المسؤوول' },
+  'admin.dashboard.loggedInAs': { en: 'Logged in as', ar: 'مسجل الدخول باسم' },
+  'admin.dashboard.placeholder': {
+    en: 'This is where the admin management features will be added.',
+    ar: 'هنا ستُضاف ميزات إدارة المسؤول.',
+  },
+  'admin.dashboard.back': { en: 'Back to site', ar: 'العودة للموقع' },
+  'admin.dashboard.logout': { en: 'Logout', ar: 'تسجيل الخروج' },
+  'auth.login.email': { en: 'Email', ar: 'البريد الإلكتروني' },
+  'auth.login.password': { en: 'Password', ar: 'كلمة المرور' },
+  'auth.login.submit': { en: 'Login', ar: 'دخول' },
+  'auth.login.loading': { en: 'Loading...', ar: 'جارٍ التحميل...' },
+  'auth.login.back': { en: 'Back to site', ar: 'العودة للموقع' },
 
   // Booking Modal
   'booking.phone.title': { en: 'Enter your phone number', ar: 'أدخل رقم هاتفك' },

@@ -106,18 +106,8 @@ export default function HeroSection({
             ))}
           </div>
 
-          {/* Right: hamburger (mobile) + language toggle + theme toggle */}
+          {/* Right: language toggle + theme toggle + hamburger (mobile) */}
           <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 shrink-0">
-            {/* Hamburger menu — mobile only */}
-            <button
-              type="button"
-              onClick={() => setIsDrawerOpen(true)}
-              aria-label={t('nav.menu')}
-              className={`${textColorClass} lg:hidden rounded-full p-2.5 shadow-2xl transition-colors hover:bg-[var(--theme-hover)]`}
-            >
-              <Menu className="h-5 w-5" strokeWidth={2.5} />
-            </button>
-
             <button
               type="button"
               onClick={toggleLanguage}
@@ -133,6 +123,16 @@ export default function HeroSection({
               className={`${textColorClass} rounded-full px-2.5 sm:px-3 py-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider shadow-2xl transition-colors hover:bg-[var(--theme-hover)] lg:px-4 lg:text-sm`}
             >
               {isLightMode ? '🌙 Dark' : '☀️ Light'}
+            </button>
+
+            {/* Hamburger menu — mobile only, rightmost */}
+            <button
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              aria-label={t('nav.menu')}
+              className={`${textColorClass} lg:hidden rounded-full p-2.5 shadow-2xl transition-colors hover:bg-[var(--theme-hover)]`}
+            >
+              <Menu className="h-5 w-5" strokeWidth={2.5} />
             </button>
           </div>
         </nav>
@@ -228,23 +228,30 @@ export default function HeroSection({
                 >
                   {/* Desktop: single string (unchanged) */}
                   <span className="max-[639px]:hidden">{t('hero.welcome')}</span>
-                  {/* Mobile: stacked two lines */}
+                  {/* Mobile: single line only */}
                   <span className="hidden max-[639px]:block">
-                    <span className="block">{t('hero.welcome.line1')}</span>
-                    <span className="block">{t('hero.welcome.line2')}</span>
+                    {t('hero.welcome.line1')}
                   </span>
                 </h1>
               </FadeIn>
             </div>
 
             {/* Portrait */}
-            <div className="relative mx-auto mt-2 sm:mt-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[90px] sm:w-[135px] lg:w-[165px] xl:w-[200px]">
+            <div className="relative mx-auto mt-3 sm:mt-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[120px] sm:w-[135px] lg:w-[165px] xl:w-[200px]">
               <FadeIn delay={0.6} y={30}>
                 <Magnet padding={150} strength={3}>
+                  {/* Mobile: أغصان logo (white in dark mode, black in light mode) */}
+                  <img
+                    src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
+                    alt="أغصان"
+                    className="w-full h-auto select-none pointer-events-none sm:hidden"
+                    draggable={false}
+                  />
+                  {/* Desktop: feather (unchanged) */}
                   <img
                     src={featherImage}
                     alt="Feather"
-                    className="w-full h-auto select-none pointer-events-none -rotate-[35deg]"
+                    className="w-full h-auto select-none pointer-events-none -rotate-[35deg] hidden sm:block"
                     draggable={false}
                   />
                 </Magnet>

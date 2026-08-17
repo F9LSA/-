@@ -4,6 +4,8 @@ import MarqueeSection from './components/MarqueeSection';
 import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
 import ProjectsSection from './components/ProjectsSection';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
 import { LanguageProvider, useLanguage } from './i18n';
 import emkanLogo from '../External Photos/Emkan.png';
 import madaLogo from '../External Photos/Mada.webp';
@@ -18,6 +20,10 @@ function AppContent() {
   });
 
   const [activeTab, setActiveTab] = useState<TabId>('home');
+  const [isAdmin, setIsAdmin] = useState(() => {
+    return window.location.hash === '#/admin';
+  });
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -29,9 +35,40 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [activeTab]);
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      setIsAdmin(window.location.hash === '#/admin');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const handleTabChange = (tab: TabId) => {
     setActiveTab(tab);
   };
+
+  if (isAdmin) {
+    if (!isAdminLoggedIn) {
+      return (
+        <AdminLogin
+          onLogin={() => setIsAdminLoggedIn(true)}
+          onBack={() => {
+            setIsAdmin(false);
+            window.location.hash = '';
+          }}
+        />
+      );
+    }
+    return (
+      <AdminDashboard
+        onLogout={() => setIsAdminLoggedIn(false)}
+        onBack={() => {
+          setIsAdmin(false);
+          window.location.hash = '';
+        }}
+      />
+    );
+  }
 
   return (
     <div className="theme-page-bg min-h-screen" style={{ overflowX: 'clip' }}>
