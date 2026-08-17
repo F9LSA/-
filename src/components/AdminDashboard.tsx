@@ -5,9 +5,10 @@ import { useLanguage } from '../i18n';
 interface AdminDashboardProps {
   onLogout: () => void;
   onBack: () => void;
+  onViewSite: () => void;
 }
 
-export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps) {
+export default function AdminDashboard({ onLogout, onBack, onViewSite }: AdminDashboardProps) {
   const { t } = useLanguage();
   const [userEmail, setUserEmail] = useState('');
 
@@ -42,13 +43,22 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
           {t('admin.dashboard.title')}
         </span>
 
-        <button
-          type="button"
-          onClick={handleLogout}
-          className="rounded-full border border-[var(--theme-border)] px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:bg-[var(--theme-hover)]"
-        >
-          {t('admin.dashboard.logout')}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onViewSite}
+            className="rounded-full bg-[var(--theme-primary)] px-4 py-2 text-sm font-medium uppercase tracking-wider text-white transition-opacity hover:opacity-80"
+          >
+            {t('admin.dashboard.viewSite')}
+          </button>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="rounded-full border border-[var(--theme-border)] px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:bg-[var(--theme-hover)]"
+          >
+            {t('admin.dashboard.logout')}
+          </button>
+        </div>
       </nav>
 
       {/* Admin Content */}
