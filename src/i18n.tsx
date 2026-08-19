@@ -200,7 +200,7 @@ DIVINIA is your trusted, all-in-one aesthetic clinic.`,
   // Admin
   'admin.login.title': { en: 'Admin Login', ar: 'تسجيل دخول المسؤوول' },
   'admin.dashboard.title': { en: 'Admin Panel', ar: 'لوحة التحكم' },
-  'admin.dashboard.welcome': { en: 'Welcome, Admin', ar: 'مرحباً، أيها المسؤوول' },
+  'admin.dashboard.welcome': { en: 'Welcome, Boss', ar: 'مرحباً، أيها المسؤوول' },
   'admin.dashboard.loggedInAs': { en: 'Logged in as', ar: 'مسجل الدخول باسم' },
   'admin.dashboard.placeholder': {
     en: 'This is where the admin management features will be added.',

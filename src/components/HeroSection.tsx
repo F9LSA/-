@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import FadeIn from './FadeIn';
 import Magnet from './Magnet';
 import { useLanguage } from '../i18n';
 import featherImage from '../../External Photos/Feather.png';
@@ -10,6 +9,32 @@ import aghsanWhiteImage from '../../External Photos/أغصان white.png';
 
 // Website domain (code-only label — not displayed on the site)
 const WEBSITE_DOMAIN = 'https://aghsan.com';
+
+const HERO_EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
+// Hero content reveal — animates once on mount (never re-triggers on scroll)
+function HeroReveal({
+  children,
+  delay = 0,
+  y = 30,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.7, ease: HERO_EASE }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export type TabId = 'home' | 'about' | 'services' | 'projects';
 
@@ -29,6 +54,10 @@ export default function HeroSection({
   const isHome = activeTab === 'home';
   const { t, toggleLanguage, isArabic } = useLanguage();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // Mobile only: whether the centered hero portrait (أغصان photo) is on screen
+  const [isPortraitInView, setIsPortraitInView] = useState(true);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const portraitRef = useRef<HTMLDivElement>(null);
 
   const NAV_LINKS: { label: string; tab: TabId }[] = [
     { label: t('nav.aghsan'), tab: 'home' },
@@ -61,6 +90,84 @@ export default function HeroSection({
     setIsDrawerOpen(false);
   }, [activeTab]);
 
+  // Mobile only: fade the header logo out while the centered hero portrait is visible,
+  // and fade it back in once the portrait scrolls out of view. Desktop is unaffected.
+  useEffect(() => {
+    if (!isHome) {
+      setIsPortraitInView(false);
+      return;
+    }
+
+    const mq = window.matchMedia('(max-width: 639px)');
+    let observer: IntersectionObserver | null = null;
+
+    const setupObserver = () => {
+      observer?.disconnect();
+      observer = null;
+
+      if (!mq.matches || !portraitRef.current) {
+        setIsPortraitInView(true);
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          setIsPortraitInView(entries[0].isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(portraitRef.current);
+    };
+
+    setupObserver();
+    mq.addEventListener('change', setupObserver);
+
+    return () => {
+      observer?.disconnect();
+      mq.removeEventListener('change', setupObserver);
+    };
+  }, [isHome]);
+
+  // Mobile only: hide the header when scrolling down, show it when scrolling up.
+  // Desktop is unaffected.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (!mq.matches) {
+          setIsHeaderHidden(false);
+        } else if (y <= 0) {
+          setIsHeaderHidden(false);
+        } else if (y > lastY && y - lastY > 4) {
+          setIsHeaderHidden(true);
+        } else if (lastY - y > 4) {
+          setIsHeaderHidden(false);
+        }
+        lastY = y;
+        ticking = false;
+      });
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    const handleMqChange = () => {
+      if (!mq.matches) setIsHeaderHidden(false);
+    };
+    mq.addEventListener('change', handleMqChange);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      mq.removeEventListener('change', handleMqChange);
+    };
+  }, []);
+
   const textColorClass = isLightMode ? 'text-black' : 'theme-primary-text';
 
   const handleNavClick = (tab: TabId) => {
@@ -70,17 +177,30 @@ export default function HeroSection({
 
   return (
     <section
-      className={`relative flex flex-col ${isHome ? 'h-screen' : ''}`}
+      className={`relative flex flex-col ${
+        isHome ? 'h-screen' : 'max-[639px]:pt-14'
+      }`}
       style={{ overflowX: 'clip' }}
     >
       {/* Navbar */}
-      <FadeIn delay={0} y={-20} as="nav">
-        <nav className="relative flex justify-between items-center gap-3 sm:gap-4 px-4 sm:px-6 lg:px-10 pt-4 sm:pt-6 lg:pt-8 shadow-lg">
+      <header
+        className={`max-[639px]:fixed max-[639px]:top-0 max-[639px]:left-0 max-[639px]:right-0 max-[639px]:z-40 max-[639px]:bg-[var(--page-bg)] max-[639px]:transition-transform max-[639px]:duration-300 ${
+          isHeaderHidden ? 'max-[639px]:-translate-y-full' : 'max-[639px]:translate-y-0'
+        }`}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: HERO_EASE }}
+        >
+          <nav className="relative flex justify-between items-center gap-3 sm:gap-4 px-4 sm:px-6 lg:px-10 pt-4 sm:pt-6 lg:pt-8 shadow-lg">
           {/* Left: logo */}
           <button
             type="button"
             onClick={() => handleNavClick('home')}
-            className="opacity-100 transition-opacity duration-200 hover:opacity-70"
+            className={`transition-opacity duration-200 hover:opacity-70 ${
+              isHome && isPortraitInView ? 'max-[639px]:opacity-0' : ''
+            }`}
           >
             <img
               src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
@@ -135,8 +255,9 @@ export default function HeroSection({
               <Menu className="h-5 w-5" strokeWidth={2.5} />
             </button>
           </div>
-        </nav>
-      </FadeIn>
+          </nav>
+        </motion.div>
+      </header>
 
       {/* Mobile Nav Drawer */}
       <AnimatePresence>
@@ -215,10 +336,10 @@ export default function HeroSection({
       {isHome && (
         <>
           {/* Centered hero content (mobile) */}
-          <div className="flex flex-col items-center justify-center flex-1 lg:block lg:flex-none">
+          <div className="flex flex-col items-center justify-center flex-1 max-[639px]:pt-8 lg:block lg:flex-none">
             {/* Hero Heading */}
             <div className="overflow-hidden lg:mt-6 lg:mb-0 px-2">
-              <FadeIn delay={0.15} y={40}>
+              <HeroReveal delay={0.15} y={40}>
                 <h1
                   className={`hero-heading font-black uppercase tracking-tight leading-none whitespace-normal w-full text-center ${
                     isArabic
@@ -233,21 +354,24 @@ export default function HeroSection({
                     {t('hero.welcome.line1')}
                   </span>
                 </h1>
-              </FadeIn>
+              </HeroReveal>
             </div>
 
             {/* Portrait */}
-            <div className="relative mx-auto mt-3 sm:mt-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[120px] sm:w-[135px] lg:w-[165px] xl:w-[200px]">
-              <FadeIn delay={0.6} y={30}>
+            <div
+              ref={portraitRef}
+              className="relative mx-auto mt-3 sm:mt-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[120px] sm:w-[135px] lg:w-[165px] xl:w-[200px]"
+            >
+              {/* Mobile: أغصان logo — static, no movement (white in dark mode, black in light mode) */}
+              <img
+                src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
+                alt="أغصان"
+                className="w-full h-auto select-none pointer-events-none sm:hidden"
+                draggable={false}
+              />
+              {/* Desktop: feather (unchanged) */}
+              <HeroReveal delay={0.6} y={30}>
                 <Magnet padding={150} strength={3}>
-                  {/* Mobile: أغصان logo (white in dark mode, black in light mode) */}
-                  <img
-                    src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
-                    alt="أغصان"
-                    className="w-full h-auto select-none pointer-events-none sm:hidden"
-                    draggable={false}
-                  />
-                  {/* Desktop: feather (unchanged) */}
                   <img
                     src={featherImage}
                     alt="Feather"
@@ -255,20 +379,20 @@ export default function HeroSection({
                     draggable={false}
                   />
                 </Magnet>
-              </FadeIn>
+              </HeroReveal>
             </div>
           </div>
 
           {/* Bottom bar */}
           <div className="mt-auto flex justify-between items-end px-4 sm:px-6 lg:px-10 pb-5 sm:pb-7 lg:pb-10 relative z-20">
-            <FadeIn delay={0.35} y={20}>
+            <HeroReveal delay={0.35} y={20}>
               <p
                 className="theme-secondary-text font-light uppercase tracking-wide leading-snug max-w-[140px] sm:max-w-[220px] lg:max-w-[260px]"
                 style={{ fontSize: 'clamp(0.65rem, 1.4vw, 1.5rem)' }}
               >
                 {t('hero.tagline')}
               </p>
-            </FadeIn>
+            </HeroReveal>
           </div>
         </>
       )}

@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import FadeIn from './FadeIn';
 import LiveProjectButton from './LiveProjectButton';
 import { useLanguage } from '../i18n';
+import { supabase } from '../lib/supabase';
 import kiosk11 from '../../External Photos/كشك 1.1.png';
 import kiosk12 from '../../External Photos/كشك 1.2.png';
 import kiosk13 from '../../External Photos/كشك 1.3.png';
@@ -57,6 +58,13 @@ interface Project {
   col1Image1Position?: string;
   col2ImagePosition?: string;
   extraImages?: string[];
+  isDynamic?: boolean;
+  nameEn?: string;
+  nameAr?: string;
+  categoryEn?: string;
+  categoryAr?: string;
+  descriptionEn?: string;
+  descriptionAr?: string;
 }
 
 function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
@@ -157,19 +165,37 @@ function PhotoLightbox({ images, name }: { images: string[]; name: string }) {
   );
 }
 
+function getProjectDisplayName(project: Project, t: (key: string) => string, isArabic: boolean): string {
+  if (project.isDynamic) {
+    return isArabic ? project.nameAr || project.name : project.nameEn || project.name;
+  }
+  return t(project.name);
+}
+
+function getProjectCategory(project: Project, t: (key: string) => string, isArabic: boolean): string {
+  if (project.isDynamic) {
+    return isArabic ? project.categoryAr || project.categoryEn || '' : project.categoryEn || project.categoryKey;
+  }
+  return t(project.categoryKey);
+}
+
 function ProjectCard({
   project,
   index,
   total,
   t,
+  isArabic,
   onView,
 }: {
   project: Project;
   index: number;
   total: number;
   t: (key: string) => string;
+  isArabic: boolean;
   onView: () => void;
 }) {
+  const displayName = getProjectDisplayName(project, t, isArabic);
+  const displayCategory = getProjectCategory(project, t, isArabic);
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -200,10 +226,10 @@ function ProjectCard({
             </span>
             <div className="flex flex-col">
               <span className="theme-secondary-text uppercase tracking-widest text-[10px] sm:text-sm font-medium">
-                {t(project.categoryKey)}
+                {displayCategory}
               </span>
               <span className="theme-primary-text uppercase font-medium text-base sm:text-2xl lg:text-3xl">
-                {t(project.name)}
+                {displayName}
               </span>
             </div>
           </div>
@@ -217,14 +243,14 @@ function ProjectCard({
               <div className="flex-col gap-2 sm:gap-3 hidden lg:flex" style={{ width: '40%' }}>
                 <img
                   src={project.col1Image1}
-                  alt={`${t(project.name)} detail 1`}
+                  alt={`${displayName} detail 1`}
                   className={`w-full object-cover ${project.col1Image1Position || 'object-top'} rounded-[24px] sm:rounded-[50px] lg:rounded-[60px]`}
                   style={{ height: 'clamp(110px, 16vw, 230px)' }}
                   loading="lazy"
                 />
                 <img
                   src={project.col1Image2}
-                  alt={`${t(project.name)} detail 2`}
+                  alt={`${displayName} detail 2`}
                   className="w-full object-cover rounded-[24px] sm:rounded-[50px] lg:rounded-[60px]"
                   style={{ height: 'clamp(10px, 16vw, 250px)' }}
                   loading="lazy"
@@ -235,7 +261,7 @@ function ProjectCard({
               >
                 <img
                   src={project.col2Image}
-                  alt={`${t(project.name)} main visual`}
+                  alt={`${displayName} main visual`}
                   className={`w-full h-full rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] object-cover ${project.col2ImagePosition || 'object-center'}`}
                   loading="lazy"
                 />
@@ -248,7 +274,7 @@ function ProjectCard({
               >
                 <img
                   src={project.col1Image1}
-                  alt={`${t(project.name)} detail 1`}
+                  alt={`${displayName} detail 1`}
                   className={`w-full h-full rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] object-cover ${project.col1Image1Position || 'object-top'}`}
                   loading="lazy"
                 />
@@ -258,7 +284,7 @@ function ProjectCard({
               >
                 <img
                   src={project.col2Image}
-                  alt={`${t(project.name)} main visual`}
+                  alt={`${displayName} main visual`}
                   className={`w-full h-full rounded-[24px] sm:rounded-[50px] lg:rounded-[60px] object-cover ${project.col2ImagePosition || 'object-center'}`}
                   loading="lazy"
                 />
@@ -275,14 +301,21 @@ function ProjectOverlay({
   project,
   index,
   t,
+  isArabic,
   onClose,
 }: {
   project: Project;
   index: number;
   t: (key: string) => string;
+  isArabic: boolean;
   onClose: () => void;
 }) {
   const albumImages = [project.col1Image1, project.col1Image2, project.col2Image, ...(project.extraImages || [])].filter((img): img is string => img !== undefined);
+  const displayName = getProjectDisplayName(project, t, isArabic);
+  const displayCategory = getProjectCategory(project, t, isArabic);
+  const description = project.isDynamic
+    ? (isArabic ? project.descriptionAr : project.descriptionEn) || ''
+    : t(`projects.desc.${index + 1}`);
 
   return (
     <motion.div
@@ -304,10 +337,10 @@ function ProjectOverlay({
             </span>
             <div className="flex flex-col min-w-0">
               <span className="theme-secondary-text uppercase tracking-widest text-[10px] sm:text-sm font-medium truncate">
-                {t(project.categoryKey)}
+                {displayCategory}
               </span>
               <span className="theme-primary-text uppercase font-medium text-sm sm:text-xl lg:text-2xl truncate">
-                {t(project.name)}
+                {displayName}
               </span>
             </div>
           </div>
@@ -324,7 +357,7 @@ function ProjectOverlay({
           transition={{ delay: 0.15, duration: 0.4 }}
           className="theme-secondary-text text-sm sm:text-lg lg:text-xl leading-relaxed max-w-3xl"
         >
-          {t(`projects.desc.${index + 1}`)}
+          {description}
         </motion.p>
 
         {/* Photo album */}
@@ -334,7 +367,7 @@ function ProjectOverlay({
           transition={{ delay: 0.25, duration: 0.4 }}
           className="h-[50vh] sm:h-[65vh] lg:h-[70vh]"
         >
-          <PhotoLightbox images={albumImages} name={t(project.name)} />
+          <PhotoLightbox images={albumImages} name={displayName} />
         </motion.div>
       </div>
     </motion.div>
@@ -348,8 +381,43 @@ export default function ProjectsSection({
   limit?: number;
   onViewAll?: () => void;
 }) {
-  const { t } = useLanguage();
+  const { t, isArabic } = useLanguage();
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [dynamicProjects, setDynamicProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching projects:', error);
+        return;
+      }
+
+      if (data) {
+        const mapped: Project[] = data.map((p, i) => ({
+          number: p.number || String(i + 11).padStart(2, '0'),
+          categoryKey: p.category_en || 'Projects',
+          name: p.title_en || 'Project',
+          col1Image1: p.image_url,
+          col2Image: p.image_url,
+          isDynamic: true,
+          nameEn: p.title_en,
+          nameAr: p.title_ar,
+          categoryEn: p.category_en,
+          categoryAr: p.category_ar,
+          descriptionEn: p.description_en,
+          descriptionAr: p.description_ar,
+        }));
+        setDynamicProjects(mapped);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const toggleProject = (number: string) => {
     setExpandedProject((current) => (current === number ? null : number));
@@ -449,10 +517,11 @@ export default function ProjectsSection({
     },
   ];
 
-  const visibleProjects = limit ? PROJECTS.slice(0, limit) : PROJECTS;
+  const allProjects = [...PROJECTS, ...dynamicProjects];
+  const visibleProjects = limit ? allProjects.slice(0, limit) : allProjects;
 
-  const expandedProjectData = PROJECTS.find((p) => p.number === expandedProject) || null;
-  const expandedProjectIndex = PROJECTS.findIndex((p) => p.number === expandedProject);
+  const expandedProjectData = allProjects.find((p) => p.number === expandedProject) || null;
+  const expandedProjectIndex = allProjects.findIndex((p) => p.number === expandedProject);
 
   return (
     <section
@@ -471,11 +540,12 @@ export default function ProjectsSection({
       <div className="max-w-6xl mx-auto flex flex-col">
         {visibleProjects.map((project, i) => (
           <ProjectCard
-            key={project.number}
+            key={project.number + project.name}
             project={project}
             index={i}
             total={visibleProjects.length}
             t={t}
+            isArabic={isArabic}
             onView={() => toggleProject(project.number)}
           />
         ))}
@@ -500,6 +570,7 @@ export default function ProjectsSection({
             project={expandedProjectData}
             index={expandedProjectIndex}
             t={t}
+            isArabic={isArabic}
             onClose={() => toggleProject(expandedProjectData.number)}
           />
         )}
