@@ -41,9 +41,9 @@ export default function AdminDashboard({ onLogout, onBack, onViewSite }: AdminDa
 
   useEffect(() => {
     const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      if (data?.user) {
-        setUserEmail(data.user.email || '');
+      const { data } = await supabase.auth.getSession();
+      if (data?.session?.user) {
+        setUserEmail(data.session.user.email || '');
       }
     };
     getUser();
@@ -100,6 +100,17 @@ export default function AdminDashboard({ onLogout, onBack, onViewSite }: AdminDa
     setUploading(true);
 
     try {
+      // 0. Verify an authenticated session exists before any RLS-protected operation.
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        throw new Error(sessionError.message);
+      }
+
+      if (!sessionData?.session?.user) {
+        throw new Error('You must be logged in to upload. Please log out and log back in.');
+      }
+
       // 1. Upload image to Supabase Storage
       const fileExt = imageFile.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
@@ -160,21 +171,42 @@ export default function AdminDashboard({ onLogout, onBack, onViewSite }: AdminDa
     }
   };
 
-  const handleDeleteProject = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this project?')) return;
+  const handleDeleteProject = async (project: ProjectRow) => {
+    setMessage(null);
 
-    const { error } = await supabase
-      .from('projects')
-      .delete()
-      .eq('id', id);
+    // Optimistic removal: hide the card immediately without waiting for the network.
+    const previousProjects = projects;
+    setProjects((current) => current.filter((p) => p.id !== project.id));
 
-    if (error) {
-      setMessage({ type: 'error', text: error.message });
-      return;
+    try {
+      // 1. Delete the row from the projects table.
+      const { error: deleteError } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', project.id);
+
+      if (deleteError) {
+        throw new Error(deleteError.message);
+      }
+
+      // 2. Delete the associated image from Storage (best effort).
+      const filePath = project.image_url.split('/').pop();
+      if (filePath) {
+        const { error: storageError } = await supabase.storage
+          .from('project-images')
+          .remove([filePath]);
+
+        if (storageError) {
+          console.warn('Warning: could not remove image from storage:', storageError.message);
+        }
+      }
+
+      setMessage({ type: 'success', text: 'Project deleted successfully!' });
+    } catch (err) {
+      // Roll back: if the DB delete failed, restore the card.
+      setProjects(previousProjects);
+      setMessage({ type: 'error', text: err instanceof Error ? err.message : 'Failed to delete project.' });
     }
-
-    setMessage({ type: 'success', text: 'Project deleted successfully!' });
-    fetchProjects();
   };
 
   return (
@@ -385,28 +417,38 @@ export default function AdminDashboard({ onLogout, onBack, onViewSite }: AdminDa
             {projects.length === 0 ? (
               <p className="theme-secondary-text text-sm">No projects added yet.</p>
             ) : (
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {projects.map((project) => (
                   <div
                     key={project.id}
-                    className="flex items-center gap-4 rounded-xl border border-[var(--theme-border)] p-4"
+                    className="flex flex-col overflow-hidden rounded-xl border border-[var(--theme-border)] theme-dark-surface shadow-lg"
                   >
-                    <img
-                      src={project.image_url}
-                      alt={project.title_en}
-                      className="h-16 w-16 rounded-lg object-cover"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">{project.title_en}</p>
-                      <p className="text-sm theme-secondary-text truncate">{project.title_ar}</p>
+                    <div className="relative h-40">
+                      <img
+                        src={project.image_url}
+                        alt={project.title_en}
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute top-2 left-2 rounded-full bg-black/60 backdrop-blur-sm px-2.5 py-1 text-xs font-semibold text-white">
+                        {project.number}
+                      </span>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteProject(project.id)}
-                      className="rounded-full border border-red-500/30 px-4 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-500/10"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex flex-1 flex-col p-4">
+                      <p className="font-medium truncate">{project.title_en}</p>
+                      <p className="text-sm theme-secondary-text truncate" dir="rtl" style={{ fontFamily: "'Tajawal', 'Kanit', sans-serif" }}>
+                        {project.title_ar}
+                      </p>
+                      <p className="mt-1 text-xs uppercase tracking-wider theme-secondary-text truncate">
+                        {project.category_en || 'Project'}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteProject(project)}
+                        className="mt-4 w-full rounded-full border border-red-500/30 px-4 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-500/10"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

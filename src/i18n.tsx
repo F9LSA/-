@@ -8,199 +8,142 @@ interface Translations {
 
 const translations: Translations = {
   // Nav
-  'nav.aghsan': { en: 'AGHSAN', ar: 'أغصان' },
-  'nav.about': { en: 'About', ar: 'من نحن' },
-  'nav.services': { en: 'Services', ar: 'خدماتنا' },
-  'nav.projects': { en: 'Projects', ar: 'مشاريعنا' },
+  'nav.NOVA': { en: 'NOVA', ar: 'نوڤا' },
+  'nav.about': { en: 'About', ar: 'من أنا' },
+  'nav.services': { en: 'Services', ar: 'خدماتي' },
+  'nav.projects': { en: 'Projects', ar: 'مشاريعي' },
   'nav.language': { en: 'EN/AR', ar: 'ع/إ' },
   'nav.menu': { en: 'Menu', ar: 'القائمة' },
   'nav.close': { en: 'Close', ar: 'إغلاق' },
 
   // Hero
-  'hero.welcome': { en: 'WELCOME TO AGHSAN', ar: 'مرحباً بكم في أغصان' },
-  'hero.welcome.line1': { en: 'WELCOME TO', ar: 'مرحبا بكم في' },
-  'hero.welcome.line2': { en: 'AGHSAN', ar: 'أغصان' },
+  'hero.welcome': { en: " WELCOME TO Sephr.CX ", ar: 'أنا نوڤا' },
+  'hero.welcome.line1': { en: "WELCOME", ar: 'أنا' },
+  'hero.welcome.line2': { en: 'TO Sephr.CX ', ar: 'نوڤا' },
   'hero.tagline': {
-    en: 'Your partner in creating exceptional experiences..',
-    ar: 'شريكك في صناعة تجارب استثنائية..',
+    en: 'Your partner in creating unique videos ..',
+    ar: 'شريكك في صناعة فيديوهات استثنائية..',
   },
 
   // About
-  'about.heading': { en: 'About AGHSAN', ar: 'عن أغصان' },
+  'about.heading': { en: 'About Me', ar: 'نبذة عني' },
   'about.bio': {
-    en: `We are a company specializing in organizing exhibitions, conferences, and major events, as well as designing and executing private and public celebrations that align with the aspirations of corporations, government entities, and individuals seeking excellence..
-Your Experience
-At AGHSAN, we are dedicated to transforming your thoughts into realty crafted experience. we are here to help you build your ideas.
-DIVINIA is your trusted, all-in-one aesthetic clinic.`,
-    ar: `نحن شركة متخصصة في المعارض والمؤتمرات والفعاليات الكبرى، بالإضافة إلى تصميم التخصصات الخاصة والعامة التي تحدد تطلعات الشركات والجهات الحكومية والأفراد الساعين إلى التميز..
-تجربتك
-في أغصان، نحن ملتزمون بتحويل أفكارك إلى تجارب مصممة بعناية. نحن هنا لمساعدتك في بناء أفكارك.
-ديفينيا هي عيادتك التجميلية الموثوقة المتكاملة.`,
-  },
-  'about.whoWeAre.title': { en: 'Who we are', ar: 'من نحن' },
+    en: `I’m a freelance editor for long and short videos.
+I help ambitious Content Creators turn their videos into experience that viewers enjoy , transform drafts into polished,  ready content.`,
+    ar: ` ايديتور مستقل (سواء الطويلة أو القصيرة)، وأساعد صنّاع المحتوى الطموحين على تحويل مقاطعهم إلى تجارب ممتعة للمشاهدين، وتحويل المحتوى الخام إلى محتوى وجاهز للعرض.
+`,},
+  'about.whoWeAre.title': { en: 'Who am i', ar: 'من أنا' },
   'about.whoWeAre.desc': {
-    en: 'AGHSAN is a dynamic company dedicated to creating unforgettable experiences. We specialize in organizing exhibitions, conferences, and major events, as well as designing and executing private and public celebrations for corporations, government entities, and individuals who strive for excellence.',
-    ar: 'أغصان شركة ديناميكية مكرسة لصناعة تجارب لا تُنسى. نحن متخصصون في تنظيم المعارض والمؤتمرات والفعاليات الكبرى، بالإضافة إلى تصميم وتنفيذ الاحتفالات الخاصة والعامة للشركات والجهات الحكومية والأفراد الذين يسعون إلى التميز.',
+    en: 'I’m Faisal, a professional editor focused on making your Videos sharp, clear, and enjoyful.',
+    ar: 'أنا فيصل، إديتور محترف أحرص اخلي فيديوهاتك واضحة وممتعة للمشاهدة..',
   },
-  'about.ourMessage.title': { en: 'Our message', ar: 'رسالتنا' },
+  'about.ourMessage.title': { en: 'My message', ar: 'رسالتي' },
   'about.ourMessage.desc': {
-    en: 'We believe every idea deserves to become a reality. Our message is simple: to transform your thoughts into meticulously crafted experiences. We listen, we innovate, and we deliver events that exceed expectations and leave lasting impressions.',
-    ar: 'نؤمن بأن كل فكرة تستحق أن تتحول إلى واقع. رسالتنا بسيطة: تحويل أفكارك إلى تجارب مصممة بدقة. نستمع، نبتكر، ونقدم فعاليات تتجاوز التوقعات وتترك انطباعات دائمة.',
+    en: 'I am your second set of eyes, your sounding board, and your final polish. I work closely with you to make sure your message is crystal clear before it hits the world.',
+    ar: 'أنا بمثابة عينٍ ثانيةٍ لك، ومستشارٍ ومحاورٍ لأفكارك، واللمسة الأخيرة التي تضفي على عملك كماله؛ إذ أعمل معك عن كثب لضمان أن تكون رسالتك في غاية الوضوح قبل أن تصل إلى العالم.',
   },
-  'about.ourGoal.title': { en: 'Our Goal', ar: 'هدفنا' },
+  'about.ourGoal.title': { en: 'My Goal', ar: 'هدفي' },
   'about.ourGoal.desc': {
-    en: 'Our goal is to be the region’s most trusted partner in event organization and celebration design. We aim to elevate every occasion with precision, creativity, and passion — ensuring that each project we touch reflects the vision and aspirations of those we serve.',
-    ar: 'هدفنا أن نكون الشريك الأكثر موثوقية في المنطقة في تنظيم الفعاليات وتصميم الاحتفالات. نطمح إلى الارتقاء بكل مناسبة بدقة وإبداع وشغف — لضمان أن يعكس كل مشروع نعمل عليه رؤية وتطلعات من نخدمهم.',
+    en: " You are a content creator and your time is valuable, and i'm willing to save you time and effort and energy to keep making videos.",
+    ar: ' أنت صانع محتوى ووقتك ثمين، وأنا مستعد أحفظ وقتك وجهدك وطاقتك لتواصل  صناعة المحتوى بجودة عالية.',
   },
-  'about.whyChoose.heading': { en: 'Why Choose AGHSAN', ar: 'لماذا تختار أغصان' },
-  'about.whyChoose.1.title': { en: 'Proven Expertise', ar: 'خبرة مثبتة' },
+  'about.whyChoose.heading': { en: 'Why Choose Me', ar: 'ليه تختارني' },
+  'about.whyChoose.1.title': { en: 'Passionate', ar: 'الشغف' },
   'about.whyChoose.1.desc': {
-    en: 'With years of hands-on experience across exhibitions, conferences, and celebrations, AGHSAN brings deep industry knowledge and flawless execution to every event we undertake.',
-    ar: 'مع سنوات من الخبرة العملية في المعارض والمؤتمرات والاحتفالات، تقدم أغصان معرفة صناعية عميقة وتنفيذاً متقناً لكل فعالية نتولاها.',
+    en: 'I am passionate about creating Videos that can be watched with enjoyment.',
+    ar: 'أنا متحمس أسوي مقاطع فيديو تقدر تتابعها وإنت مستمتع.',
   },
-  'about.whyChoose.2.title': { en: 'Tailored Creativity', ar: 'إبداع مخصص' },
+  'about.whyChoose.2.title': { en: 'convenience', ar: 'إبداع ' },
   'about.whyChoose.2.desc': {
-    en: 'We design every experience around your unique vision. From concept to detail, each element is crafted to reflect your identity and leave a lasting impression on your guests.',
-    ar: 'نصمم كل تجربة حول رؤيتك الفريدة. من المفهوم إلى التفاصيل، يُصمم كل عنصر ليعكس هويتك ويترك انطباعاً دائماً لدى ضيوفك.',
+    en: 'I design the vision you look for.each detail is made to reflect your identity and leave a lasting impression on your Viewers.',
+    ar: 'أصمملك الرؤية التي تبحث عنها. كل تفصيل مُصمم ليعكس هويتك ويترك انطباعاً دائماً لدى مشاهديك.',
   },
-  'about.whyChoose.3.title': { en: 'End-to-End Commitment', ar: 'التزام شامل' },
+  'about.whyChoose.3.title': { en: 'Commitment', ar: 'التزام ' },
   'about.whyChoose.3.desc': {
-    en: 'We manage everything from initial planning to final execution — coordination, production, and media coverage — so you can enjoy the moment while we handle the rest.',
-    ar: 'ندير كل شيء من التخطيط الأولي إلى التنفيذ النهائي — التنسيق والإنتاج والتغطية الإعلامية — لتستمتع باللحظة بينما نتولى نحن الباقي.',
+    en: 'I manage the video from initial planning to final execution, so you can enjoy the moment while I handle the rest.',
+    ar: 'أدير الفيديو من التخطيط الأولي إلى التنفيذ النهائي، بحيث يمكنك الاستمتاع باللحظة بينما أتعامل مع الباقي.',
   },
 
   // Services
-  'services.heading': { en: 'Services', ar: 'خدماتنا' },
-  'services.1.name': { en: 'Organize', ar: 'تنظيم' },
+  'services.heading': { en: 'Services', ar: 'خدماتي' },
+  'services.1.name': { en: 'Short form videos', ar: 'المقاطع القصيرة' },
   'services.1.desc': {
-    en: 'Organizing events, exhibitions, and conferences with a high level of professionalism, from detailed planning and coordination to seamless execution and overall event management.',
-    ar: 'تنظيم الفعاليات والمعارض والمؤتمرات بمستوى عالٍ من الاحترافية، من التخطيط التفصيلي والتنسيق إلى التنفيذ السلس والإدارة الشاملة للفعالية.',
+    en: 'Creating Short form videos between 1m to 3m with daily deliver rate.',
+    ar: 'تصميم مقاطع فيديو بسيطة تجذب جمهورك مع تسليم يومي.',
   },
-  'services.2.name': { en: 'Coordination', ar: 'تنسيق' },
+  'services.2.name': { en: 'Medium form Videos', ar: 'المقاطع المتوسطة' },
   'services.2.desc': {
-    en: 'Coordinating celebrations and public and private events, with comprehensive planning, organization, and execution to ensure smooth operations and memorable experiences..',
-    ar: 'تنسيق الاحتفالات والفعاليات العامة والخاصة، مع تخطيط وتنظيم وتنفيذ شامل لضمان سير سلس وتجارب لا تُنسى..',
+    en: " Creating medium form videos between 8m to 15m videos and engage your audience with high production value, .",
+    ar: 'تصميم مقاطع فيديو متوسطة الطول ما بين 8 - 15 دقيقة تجذب جمهورك بقيمة إنتاج عالية..',
   },
-  'services.3.name': { en: 'Design', ar: 'تصميم' },
+  'services.3.name': { en: 'Long form videos', ar: 'المقاطع الطويلة' },
   'services.3.desc': {
-    en: 'Design and fit-out of décor, interactive experiences, and engaging event environments, tailored to create a distinctive and memorable atmosphere.',
-    ar: 'تصميم وتجهيز الديكورات والتجارب التفاعلية وبيئات الفعاليات الجذابة، مصممة خصيصاً لخلق أجواء مميزة لا تُنسى.',
+    en: 'Creating Long form videos between 20m to 1h videos with engaging simple edit to match your style, .',
+    ar: 'تصميم مقاطع فيديو طويلة ما بين 20 دقيقة إلى ساعة مع تعديل بسيط وجذاب ليتناسب مع أسلوبك..',
   },
-  'services.4.name': { en: 'Production', ar: 'إنتاج' },
+  'services.4.name': { en: 'Complex Editing', ar: 'المقاطع المعقدة' },
   'services.4.desc': {
-    en: 'Field Production, comprehensive sound, lighting, and technical equipment for professional event production..',
-    ar: 'الإنتاج الميداني، وصوت وإضاءة ومعدات تقنية شاملة لإنتاج فعاليات احترافية..',
+    en: 'its designed to match certain requirements and a lot of highly produced content.',
+    ar: 'نصمم لك ليتوافق مع متطلبات معينة والكثير من المحتوى عالي الإنتاجية.',
   },
-  'services.5.name': { en: 'Administration', ar: 'إدارة' },
+  'services.5.name': { en: 'Levels', ar: 'درجات' },
   'services.5.desc': {
-    en: 'Management of Events and Media Coverage, including planning, coordination, execution, and professional event documentation..',
-    ar: 'إدارة الفعاليات والتغطية الإعلامية، بما في ذلك التخطيط والتنسيق والتنفيذ والتوثيق الاحترافي للفعاليات..',
+    en: 'You can request a form of service based on how much editing in the video to match your needs.',
+    ar: 'يمكنك طلب شكل من الخدمات بناء على كمية الإديت المطلوبة في الفيديو ليطابق احتياجاتك.',
   },
 
   // Projects
-  'projects.heading': { en: 'PROJECTS', ar: 'مشاريعنا' },
+  'projects.heading': { en: 'PROJECTS', ar: 'مشاريعي' },
   'projects.live': { en: 'View Project', ar: 'عرض المشروع' },
   'projects.close': { en: 'Close Project', ar: 'إغلاق المشروع' },
   'projects.viewAll': { en: 'View All Projects', ar: 'عرض جميع المشاريع' },
+
   'projects.desc.1': {
-    en: 'A custom-designed souvenir kiosk for the Riyadh Boulevard, blending modern aesthetics with traditional Saudi spirit to create an inviting retail experience.',
-    ar: 'كشك هدايا تذكارية مصمم خصيصاً لبوليفارد الرياض، يمزج بين الجماليات الحديثة والروح السعودية التقليدية لخلق تجربة بيع بالتجزئة جذابة.',
+    en: 'Short form video',
+    ar: ' تصميم المقاطع القصيرة.',
   },
   'projects.desc.2': {
-    en: 'A comprehensive event setup for Wakan Real Estate Development, featuring elegant staging, branding, and interactive displays at a Riyadh City event.',
-    ar: 'تجهيز شامل لفعالية شركة وكن للتطوير العقاري، يتضمن مسرحاً أنيقاً وهوية بصرية وعروضاً تفاعلية في فعالية بمدينة الرياض.',
+    en: 'Edit form video',
+    ar: 'مقاطع الإيديت.',
   },
   'projects.desc.3': {
-    en: 'A professional exhibition booth for XPL Company at the Supply Chain Conference, designed to showcase their solutions with modern, clean branding.',
-    ar: 'جناح معرض احترافي لشركة XPL في مؤتمر سلسلة الإمداد، مصمم لعرض حلولهم بهوية عصرية ونظيفة.',
-  },
-  'projects.desc.4': {
-    en: 'A factory booth for Wash Thru at the Made in Saudi Exhibition, highlighting their products with an industrial yet welcoming design.',
-    ar: 'جناح مصنع لشركة Wash Thru في معرض صنع في السعودية، يبرز منتجاتهم بتصميم صناعي وترحيبي في آن واحد.',
-  },
-  'projects.desc.5': {
-    en: 'A campaign booth for the "Wiqaa" initiative during Hajj season, designed to provide peace of mind with clear, reassuring messaging and a welcoming space.',
-    ar: 'جناح حملة "وقاء" خلال موسم الحج، مصمم لتوفير راحة البال برسائل واضحة ومطمئنة ومساحة ترحيبية.',
-  },
-  'projects.desc.6': {
-    en: 'A creative booth for "Dream BOOK" at the Riyadh International Book Fair, inviting visitors into a world of imagination and literature.',
-    ar: 'جناح إبداعي لـ "Dream BOOK" في معرض الرياض الدولي للكتاب، يدعو الزوار إلى عالم من الخيال والأدب.',
-  },
-  'projects.desc.7': {
-    en: 'Our participation in the Cityscape exhibition in Riyadh, featuring a modern booth design that reflects innovation in urban development.',
-    ar: 'مشاركتنا في معرض سيتي سكيب بالرياض، بتصميم جناح عصري يعكس الابتكار في التطوير العمراني.',
-  },
-  'projects.desc.8': {
-    en: 'A charming sweets corner kiosk, designed to delight customers with a warm, inviting atmosphere and beautiful product displays.',
-    ar: 'كشك زاوية حلويات ساحر، مصمم لإسعاد العملاء بأجواء دافئة وترحيبية وعروض منتجات جميلة.',
-  },
-  'projects.desc.9': {
-    en: 'Handcrafted wooden decorations for the historic district of Jeddah, blending traditional craftsmanship with modern design sensibilities.',
-    ar: 'ديكورات خشبية مصنوعة يدوياً لمنطقة جدة التاريخية، تمزج بين الحرفية التقليدية وحساسية التصميم الحديث.',
-  },
-  'projects.desc.10': {
-    en: 'Innovative 3D designs created for our clients, bringing their visions to life with detailed, realistic visualizations.',
-    ar: 'تصاميم ثلاثية الأبعاد مبتكرة أُنشئت لعملائنا، تجعل رؤاهم تنبض بالحياة من خلال تصورات تفصيلية واقعية.',
+    en: 'Medium form video',
+    ar: 'المقاطع متوسطة المدة.',
   },
 
   // Project names
-  'projects.name.1': { en: 'Saudi Spirit, Souvenir Kiosk', ar: 'كشك روح السعودية للذكرى' },
-  'projects.name.2': { en: 'Wakan Real Estate Development Event', ar: 'فعالية وكن للتطوير العقاري' },
-  'projects.name.3': { en: 'XPL Company', ar: 'بوث شركة XPL soloutions' },
-  'projects.name.4': { en: 'Wash Thru Factory Booth', ar: 'جناح مصنع واش ثرو' },
-  'projects.name.5': { en: '"Wiqaa" Campaign Booth: For Peace of Mind', ar: 'جناح حملة "وقاء": لراحة البال' },
-  'projects.name.6': { en: '"Dream BOOK" Booth', ar: 'جناح "دريم بوك"' },
-  'projects.name.7': { en: 'Participation in the Cityscape exhibition', ar: 'المشاركة في معرض سيتي سكيب' },
-  'projects.name.8': { en: 'Sweets Corner Kiosk', ar: 'كشك زاوية الحلويات' },
-  'projects.name.9': { en: 'Wooden decorations in Historic Jeddah', ar: 'ديكورات خشبية في جدة التاريخية' },
-  'projects.name.10': { en: '3D designs for our clients', ar: 'تصاميم ثلاثية الأبعاد لعملائنا' },
+  'projects.name.1': { en: 'Short form video', ar: 'تصميم المقاطع القصيرة' },
+  'projects.name.2': { en: 'Edit form video', ar: 'مقاطع الإيديت' },
+  'projects.name.3': { en: 'Medium form video', ar: 'المقاطع متوسطة المدة' },
 
   // Project categories
-  'projects.category.Riyadh Bolyvard': { en: 'Riyadh Boulevard', ar: 'بوليفارد الرياض' },
-  'projects.category.Riyadh City': { en: 'Riyadh City', ar: 'مدينة الرياض' },
-  'projects.category.Supply Chain Conference': { en: 'Supply Chain Conference', ar: 'مؤتمر سلسلة الإمداد' },
-  'projects.category.Made in Saudi Exhibition': { en: 'Made in Saudi Exhibition', ar: 'معرض صنع في السعودية' },
-  'projects.category.Hajj Season': { en: 'Hajj Season', ar: 'موسم الحج' },
-  'projects.category.Riyadh International Book Fair': { en: 'Riyadh International Book Fair', ar: 'معرض الرياض الدولي للكتاب' },
-  'projects.category.Kiosk': { en: 'Kiosk', ar: 'كشك' },
-  'projects.category.Decorations': { en: 'Decorations', ar: 'ديكورات' },
-  'projects.category.3D Designs': { en: '3D Designs', ar: 'تصاميم ثلاثية الأبعاد' },
-  'projects.category.1': { en: 'Consultant Cosmetic Dermatology', ar: 'استشارية أمراض جلدية تجميلية' },
-  'projects.category.2': { en: 'Dermatology Consultant', ar: 'استشارية أمراض جلدية' },
-  'projects.category.3': {
-    en: 'Consultant Dermatologist and Laser & Aesthetic Medicine',
-    ar: 'استشاري أمراض جلدية وطب الليزر والتجميل',
-  },
-  'projects.category.4': { en: 'Dermatology Consultant', ar: 'استشاري أمراض جلدية' },
-  'projects.category.5': {
-    en: 'Dermatology Consultant, Dermatologic and Cosmetic Surgeon, and Laser Specialist',
-    ar: 'استشاري أمراض جلدية وجراح جلدية وتجميل وأخصائي ليزر',
+  'projects.category.Short form video': { en: 'Riyadh Boulevard', ar: 'بوليفارد الرياض' },
+  'projects.category.Edit form video': { en: 'Riyadh City', ar: 'مدينة الرياض' },
+  'projects.category.Medium form video': { en: 'Supply Chain Conference', ar: 'مؤتمر سلسلة الإمداد'
   },
 
   // Contact
-  'contact.heading': { en: 'CONTACT', ar: 'تواصل معنا' },
+  'contact.heading': { en: 'CONTACT ME', ar: 'تواصل معي' },
   'contact.whatsapp': { en: 'WhatsApp', ar: 'واتساب' },
-  'contact.location': { en: 'Jeddah, Saudi Arabia', ar: 'جدة، المملكة العربية السعودية' },
-  'contact.maps': { en: 'View on Google Maps', ar: 'عرض على خرائط جوجل' },
   'contact.workingHours': { en: 'Working Hours', ar: 'ساعات العمل' },
   'contact.satThu': { en: 'Saturday - Thursday', ar: 'السبت - الخميس' },
   'contact.service247': { en: '24/7 Service', ar: 'خدمة 24/7' },
   'contact.noFriday': { en: 'No Appointments on Friday', ar: 'لا مواعيد يوم الجمعة' },
-  'contact.contact': { en: 'Contact', ar: 'اتصل بنا' },
+  'contact.contact': { en: 'Contact', ar: 'اتصل بي' },
 
   // Footer
-  'footer.copyright': { en: '© 2026 ALL right reserved to AGHSAN', ar: '© 2026 جميع الحقوق محفوظة لأغصان' },
+  'footer.copyright': { en: '© 2026 ALL right reserved to NOVA', ar: '© 2026 جميع الحقوق محفوظة لـنوڤا' },
   'footer.whatsapp': { en: 'WhatsApp', ar: 'واتساب' },
   'footer.workingHours': { en: 'Working Hours', ar: 'ساعات العمل' },
   'footer.satThu': { en: 'Saturday - Thursday', ar: 'السبت - الخميس' },
-  'footer.hours': { en: '06:00 AM - 9:00 PM', ar: '06:00 صباحاً - 9:00 مساءً' },
+  'footer.hours': { en: '05:00 AM - 12:00 PM', ar: '05:00 صباحاً - 12:00 مساءً' },
   'footer.noFriday': { en: 'No Appointments on Friday', ar: 'لا مواعيد يوم الجمعة' },
-  'footer.contact': { en: 'Contact', ar: 'اتصل بنا' },
+  'footer.contact': { en: 'Contact', ar: 'اتصل بي' },
 
   // Admin
-  'admin.login.title': { en: 'Admin Login', ar: 'تسجيل دخول المسؤوول' },
+  'admin.login.title': { en: 'Admin Login', ar: 'تسجيل دخول الحاكم' },
   'admin.dashboard.title': { en: 'Admin Panel', ar: 'لوحة التحكم' },
-  'admin.dashboard.welcome': { en: 'Welcome, Boss', ar: 'مرحباً، أيها المسؤوول' },
+  'admin.dashboard.welcome': { en: 'Welcome, Boss', ar: 'حيو عمي' },
   'admin.dashboard.loggedInAs': { en: 'Logged in as', ar: 'مسجل الدخول باسم' },
   'admin.dashboard.placeholder': {
     en: 'This is where the admin management features will be added.',

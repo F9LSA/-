@@ -54,7 +54,7 @@ export default function ContactSection() {
               {t('contact.contact')}
             </h3>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=Hshamdini%40gmail.com&utm_source=chatgpt.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=g.aleqseller%40gmail.com&utm_source=chatgpt.com"
               target="_blank"
               rel="noreferrer"
               className="mb-2 block leading-7 underline underline-offset-4 transition hover:opacity-80 theme-primary-text"

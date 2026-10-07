@@ -31,7 +31,7 @@ body {
   --light-surface: #ffffff;
   --theme-text: #ffffff;
   --theme-text-secondary: #d7e2ea;
-  --theme-border: rgba(215, 226, 234, 0.2);
+  --theme-border: rgba(222, 215, 234, 0.2);
   --theme-hover: rgba(215, 226, 234, 0.1);
   --logo-bg: rgba(19, 13, 13, 0.05);
   --section-shadow: 0 -50px 80px -40px rgba(0, 0, 0, 0.55);
@@ -96,7 +96,7 @@ body {
 }
 
 .hero-heading {
-  background: linear-gradient(180deg, #fffeff 0%, #474747 100%);
+  background: linear-gradient(180deg, #fffeff 0%, #65438b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -3,9 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Magnet from './Magnet';
 import { useLanguage } from '../i18n';
-import featherImage from '../../External Photos/Feather.png';
-import aghsanBlackImage from '../../External Photos/أغصان black.png';
-import aghsanWhiteImage from '../../External Photos/أغصان white.png';
+import movieClapperImage from '../../External Photos/movie clapper.png';
 
 // Website domain (code-only label — not displayed on the site)
 const WEBSITE_DOMAIN = 'https://aghsan.com';
@@ -36,7 +34,7 @@ function HeroReveal({
   );
 }
 
-export type TabId = 'home' | 'about' | 'services' | 'projects';
+export type TabId = 'home' | 'about' | 'services';
 
 interface HeroSectionProps {
   isLightMode: boolean;
@@ -63,7 +61,6 @@ export default function HeroSection({
     { label: t('nav.aghsan'), tab: 'home' },
     { label: t('nav.about'), tab: 'about' },
     { label: t('nav.services'), tab: 'services' },
-    { label: t('nav.projects'), tab: 'projects' },
   ];
 
   const DRAWER_LINKS = NAV_LINKS.filter((link) => link.tab !== 'home');
@@ -202,12 +199,12 @@ export default function HeroSection({
               isHome && isPortraitInView ? 'max-[639px]:opacity-0' : ''
             }`}
           >
-            <img
-              src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
-              alt="أغصان"
-              className="h-8 sm:h-10 lg:h-14 xl:h-16 w-auto select-none pointer-events-none"
-              draggable={false}
-            />
+             <img
+               src={movieClapperImage}
+               alt="أغصان"
+               className="h-8 sm:h-10 lg:h-14 xl:h-16 w-auto select-none pointer-events-none -mt-1 -rotate-6"
+               draggable={false}
+             />
           </button>
 
           {/* Center: nav links (desktop only) */}
@@ -364,22 +361,12 @@ export default function HeroSection({
             >
               {/* Mobile: أغصان logo — static, no movement (white in dark mode, black in light mode) */}
               <img
-                src={isLightMode ? aghsanBlackImage : aghsanWhiteImage}
+                src={movieClapperImage}
                 alt="أغصان"
                 className="w-full h-auto select-none pointer-events-none sm:hidden"
                 draggable={false}
               />
-              {/* Desktop: feather (unchanged) */}
-              <HeroReveal delay={0.6} y={30}>
-                <Magnet padding={150} strength={3}>
-                  <img
-                    src={featherImage}
-                    alt="Feather"
-                    className="w-full h-auto select-none pointer-events-none -rotate-[35deg] hidden sm:block"
-                    draggable={false}
-                  />
-                </Magnet>
-              </HeroReveal>
+          
             </div>
           </div>
 

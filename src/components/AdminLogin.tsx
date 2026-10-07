@@ -24,15 +24,26 @@ export default function AdminLogin({ onLogin, onBack }: AdminLoginProps) {
       password,
     });
 
-    setLoading(false);
-
     if (error) {
+      setLoading(false);
       setError(error.message);
       return;
     }
 
-    if (data?.user) {
+    // Verify the session was actually created and persisted before proceeding.
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+    setLoading(false);
+
+    if (sessionError) {
+      setError(sessionError.message);
+      return;
+    }
+
+    if (sessionData?.session?.user) {
       onLogin();
+    } else {
+      setError('Session could not be established. Please try again.');
     }
   };
 
