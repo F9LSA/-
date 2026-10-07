@@ -140,25 +140,6 @@ I help ambitious Content Creators turn their videos into experience that viewers
   'footer.noFriday': { en: 'No Appointments on Friday', ar: 'لا مواعيد يوم الجمعة' },
   'footer.contact': { en: 'Contact', ar: 'اتصل بي' },
 
-  // Admin
-  'admin.login.title': { en: 'Admin Login', ar: 'تسجيل دخول الحاكم' },
-  'admin.dashboard.title': { en: 'Admin Panel', ar: 'لوحة التحكم' },
-  'admin.dashboard.welcome': { en: 'Welcome, Boss', ar: 'حيو عمي' },
-  'admin.dashboard.loggedInAs': { en: 'Logged in as', ar: 'مسجل الدخول باسم' },
-  'admin.dashboard.placeholder': {
-    en: 'This is where the admin management features will be added.',
-    ar: 'هنا ستُضاف ميزات إدارة المسؤول.',
-  },
-  'admin.dashboard.back': { en: 'Back to site', ar: 'العودة للموقع' },
-  'admin.dashboard.viewSite': { en: 'View Site', ar: 'عرض الموقع' },
-  'admin.dashboard.backToAdmin': { en: 'Back to Admin', ar: 'العودة للوحة التحكم' },
-  'admin.dashboard.logout': { en: 'Logout', ar: 'تسجيل الخروج' },
-  'auth.login.email': { en: 'Email', ar: 'البريد الإلكتروني' },
-  'auth.login.password': { en: 'Password', ar: 'كلمة المرور' },
-  'auth.login.submit': { en: 'Login', ar: 'دخول' },
-  'auth.login.loading': { en: 'Loading...', ar: 'جارٍ التحميل...' },
-  'auth.login.back': { en: 'Back to site', ar: 'العودة للموقع' },
-
   // Booking Modal
   'booking.phone.title': { en: 'Enter your phone number', ar: 'أدخل رقم هاتفك' },
   'booking.phone.subtitle': {

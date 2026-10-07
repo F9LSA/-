@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import HeroSection, { TabId } from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
-import AdminLogin from './components/AdminLogin';
-import AdminDashboard from './components/AdminDashboard';
 import { LanguageProvider, useLanguage } from './i18n';
 
 function AppContent() {
@@ -12,11 +10,6 @@ function AppContent() {
   });
 
   const [activeTab, setActiveTab] = useState<TabId>('home');
-  const [isAdmin, setIsAdmin] = useState(() => {
-    return window.location.hash === '#/admin';
-  });
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-  const [showAdminPanel, setShowAdminPanel] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -28,19 +21,11 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [activeTab]);
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      setIsAdmin(window.location.hash === '#/admin');
-    };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
   const handleTabChange = (tab: TabId) => {
     setActiveTab(tab);
   };
 
-  const renderSite = (showAdminButton: boolean) => (
+  const renderSite = () => (
     <div className="relative">
       <div className="theme-page-bg min-h-screen" style={{ overflowX: 'clip' }}>
         <HeroSection
@@ -113,52 +98,10 @@ function AppContent() {
         </div>
       </div>
 
-      {showAdminButton && (
-        <button
-          type="button"
-          onClick={() => setShowAdminPanel(true)}
-          className="fixed bottom-6 right-6 z-50 rounded-full bg-[var(--theme-primary)] px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white shadow-2xl transition-opacity hover:opacity-80"
-        >
-          {t('admin.dashboard.title')}
-        </button>
-      )}
     </div>
   );
 
-  if (isAdmin) {
-    if (!isAdminLoggedIn) {
-      return (
-        <AdminLogin
-          onLogin={() => {
-            setIsAdminLoggedIn(true);
-            setShowAdminPanel(true);
-          }}
-          onBack={() => {
-            setIsAdmin(false);
-            window.location.hash = '';
-          }}
-        />
-      );
-    }
-
-    if (showAdminPanel) {
-      return (
-        <AdminDashboard
-          onLogout={() => setIsAdminLoggedIn(false)}
-          onBack={() => {
-            setIsAdmin(false);
-            window.location.hash = '';
-          }}
-          onViewSite={() => setShowAdminPanel(false)}
-        />
-      );
-    }
-
-    // Admin logged in - show the same site as a normal user
-    return renderSite(true);
-  }
-
-  return renderSite(false);
+  return renderSite();
 }
 
 export default function App() {
