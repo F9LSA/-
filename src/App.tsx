@@ -8,7 +8,7 @@ import { LanguageProvider, useLanguage } from './i18n';
 
 function AppContent() {
   const [isLightMode, setIsLightMode] = useState(() => {
-    return window.localStorage.getItem('أغصان-theme') === 'light';
+    return window.localStorage.getItem('sephr-theme') === 'light';
   });
 
   const [activeTab, setActiveTab] = useState<TabId>('home');
@@ -21,7 +21,7 @@ function AppContent() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = isLightMode ? 'light' : 'dark';
-    window.localStorage.setItem('أغصان-theme', isLightMode ? 'light' : 'dark');
+    window.localStorage.setItem('sephr-theme', isLightMode ? 'light' : 'dark');
   }, [isLightMode]);
 
   useEffect(() => {

@@ -65,7 +65,7 @@ export default function ContactSection() {
               href="tel:0114542266"
               className="block leading-7 underline underline-offset-4 transition hover:opacity-80 theme-primary-text"
             >
-              +966 57 177 3490
+              +966 56 312 4416
             </a>
           </div>
         </FadeIn>

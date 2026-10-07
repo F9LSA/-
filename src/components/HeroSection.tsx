@@ -6,7 +6,7 @@ import { useLanguage } from '../i18n';
 import movieClapperImage from '../../External Photos/movie clapper.png';
 
 // Website domain (code-only label — not displayed on the site)
-const WEBSITE_DOMAIN = 'https://aghsan.com';
+const WEBSITE_DOMAIN = 'https://sephr.cx';
 
 const HERO_EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -52,7 +52,7 @@ export default function HeroSection({
   const isHome = activeTab === 'home';
   const { t, toggleLanguage, isArabic } = useLanguage();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // Mobile only: whether the centered hero portrait (أغصان photo) is on screen
+  // Mobile only: whether the centered hero portrait (Sephr photo) is on screen
   const [isPortraitInView, setIsPortraitInView] = useState(true);
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const portraitRef = useRef<HTMLDivElement>(null);
@@ -201,7 +201,7 @@ export default function HeroSection({
           >
              <img
                src={movieClapperImage}
-               alt="أغصان"
+               alt="Sephr"
                className="h-8 sm:h-10 lg:h-14 xl:h-16 w-auto select-none pointer-events-none -mt-1 -rotate-6"
                draggable={false}
              />
@@ -301,7 +301,7 @@ export default function HeroSection({
                 </button>
               </div>
 
-              {/* Drawer nav links — all except أغصان */}
+               {/* Drawer nav links — all except Sephr */}
               <nav className="flex flex-col px-4 py-6 gap-2">
                 {DRAWER_LINKS.map((link, index) => (
                   <motion.button
@@ -359,10 +359,10 @@ export default function HeroSection({
               ref={portraitRef}
               className="relative mx-auto mt-3 sm:mt-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[120px] sm:w-[135px] lg:w-[165px] xl:w-[200px]"
             >
-              {/* Mobile: أغصان logo — static, no movement (white in dark mode, black in light mode) */}
+               {/* Mobile: Sephr logo — static, no movement (white in dark mode, black in light mode) */}
               <img
                 src={movieClapperImage}
-                alt="أغصان"
+                alt="Sephr"
                 className="w-full h-auto select-none pointer-events-none sm:hidden"
                 draggable={false}
               />

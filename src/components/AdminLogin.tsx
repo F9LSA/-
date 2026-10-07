@@ -65,7 +65,7 @@ export default function AdminLogin({ onLogin, onBack }: AdminLoginProps) {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full rounded-xl border border-[var(--theme-border)] bg-transparent px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
-              placeholder="admin@aghsan.com"
+              placeholder="admin@sephr.cx"
             />
           </div>
 

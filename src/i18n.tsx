@@ -8,7 +8,7 @@ interface Translations {
 
 const translations: Translations = {
   // Nav
-  'nav.NOVA': { en: 'NOVA', ar: 'نوڤا' },
+  'nav.NOVA': { en: 'Sephr', ar: 'صفر' },
   'nav.about': { en: 'About', ar: 'من أنا' },
   'nav.services': { en: 'Services', ar: 'خدماتي' },
   'nav.projects': { en: 'Projects', ar: 'مشاريعي' },
@@ -17,9 +17,9 @@ const translations: Translations = {
   'nav.close': { en: 'Close', ar: 'إغلاق' },
 
   // Hero
-  'hero.welcome': { en: " WELCOME TO Sephr.CX ", ar: 'أنا نوڤا' },
+  'hero.welcome': { en: " WELCOME TO Sephr.CX ", ar: 'أنا صفر' },
   'hero.welcome.line1': { en: "WELCOME", ar: 'أنا' },
-  'hero.welcome.line2': { en: 'TO Sephr.CX ', ar: 'نوڤا' },
+  'hero.welcome.line2': { en: 'TO Sephr.CX ', ar: 'صفر' },
   'hero.tagline': {
     en: 'Your partner in creating unique videos ..',
     ar: 'شريكك في صناعة فيديوهات استثنائية..',
@@ -132,7 +132,7 @@ I help ambitious Content Creators turn their videos into experience that viewers
   'contact.contact': { en: 'Contact', ar: 'اتصل بي' },
 
   // Footer
-  'footer.copyright': { en: '© 2026 ALL right reserved to NOVA', ar: '© 2026 جميع الحقوق محفوظة لـنوڤا' },
+  'footer.copyright': { en: '© 2026 ALL right reserved to Sephr', ar: '© 2026 جميع الحقوق محفوظة لـصفر' },
   'footer.whatsapp': { en: 'WhatsApp', ar: 'واتساب' },
   'footer.workingHours': { en: 'Working Hours', ar: 'ساعات العمل' },
   'footer.satThu': { en: 'Saturday - Thursday', ar: 'السبت - الخميس' },
@@ -222,7 +222,7 @@ const LanguageContext = createContext<LanguageContextValue>({
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>(() => {
-    return (window.localStorage.getItem('أغصان-language') as Language) || 'en';
+    return (window.localStorage.getItem('sephr-language') as Language) || 'en';
   });
 
   const isArabic = language === 'ar';
@@ -230,7 +230,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
-    window.localStorage.setItem('أغصان-language', language);
+    window.localStorage.setItem('sephr-language', language);
   }, [language, isArabic]);
 
   const toggleLanguage = () => {
